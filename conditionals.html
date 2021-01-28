@@ -700,6 +700,30 @@ logical not &#xC740; &#xC55E;&#xC5D0; <code>!</code> &#xB97C; &#xBD99;&#xC774;&#
 <p><code>#elif</code> &#xC9C0;&#xC2DC;&#xC790; &#xB4A4;&#xC5D0;&#xB294; <code>#else</code> &#xAC00; &#xC640;&#xB3C4; &#xB418;&#xACE0; &#xC548; &#xC640;&#xB3C4; &#xB429;&#xB2C8;&#xB2E4;.</p>
 <h2 id="else">#else</h2>
 <p><code>#else</code> &#xC9C0;&#xC2DC;&#xC790;&#xB294; <code>#if</code>, <code>#elif</code> &#xBFD0;&#xB9CC; &#xC544;&#xB2C8;&#xB77C; <code>#ifdef</code>, <code>#ifndef</code> &#xC9C0;&#xC2DC;&#xC790; &#xC640;&#xB3C4; &#xD568;&#xAED8; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
+<p><code>#if</code> , <code>#else</code> &#xAC00; &#xC911;&#xCCA9;&#xB420; &#xACBD;&#xC6B0; &#xC801;&#xC6A9;&#xB418;&#xB294; &#xC21C;&#xC11C;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-c">$ gcpp &lt;&lt;\@
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> FEATURE_A</span>
+
+<span class="hljs-preprocessor">#<span class="hljs-keyword">if</span> defined (FEATURE_A)</span>
+AAA
+<span class="hljs-preprocessor">#<span class="hljs-keyword">if</span> defined (FEATURE_B)</span>
+BBB
+<span class="hljs-preprocessor">#<span class="hljs-keyword">if</span> defined (FEATURE_C)</span>
+CCC
+<span class="hljs-preprocessor">#<span class="hljs-keyword">else</span></span>
+ELSE_CCC
+<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">else</span></span>
+ELSE_BBB
+<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">else</span></span>
+ELSE_AAA
+<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
+@
+
+AAA
+ELSE_BBB
+</code></pre>
 <h2 id="endif">#endif</h2>
 <p><code>#if</code>, <code>#ifdef</code>, <code>#ifndef</code> &#xC9C0;&#xC2DC;&#xC790;&#xB97C; &#xC0AC;&#xC6A9;&#xD560; &#xB54C; &#xC885;&#xB8CC;&#xB97C; &#xB098;&#xD0C0;&#xB0C5;&#xB2C8;&#xB2E4;.</p>
 <pre><code class="lang-c"><span class="hljs-preprocessor">#<span class="hljs-keyword">if</span> __linux__                            <span class="hljs-comment">// #if</span></span>
