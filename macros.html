@@ -571,7 +571,7 @@
 
 --------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define BAR(a, b) ((a) + (b))
 #define BAR 123                  // &#xB3D9;&#xC77C;&#xD55C; &#xC774;&#xB984;&#xC73C;&#xB85C; &#xC815;&#xC758;&#xD558;&#xBA74; warning &#xC774; &#xBC1C;&#xC0DD;&#xD569;&#xB2C8;&#xB2E4;.
 
@@ -584,7 +584,7 @@ BAR
 123
 --------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define FOO 123         // &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;
 &quot;FOO is: &quot; FOO
 &apos;FOO is: &apos; FOO
@@ -650,7 +650,7 @@ $ gcpp &lt;&lt;\@
 </code></pre><p><code>-</code> &#xC640; <code>.</code> &#xBB38;&#xC790;&#xB294; &#xB9E4;&#xD06C;&#xB85C; &#xC774;&#xB984;&#xC744; &#xAD6C;&#xC131;&#xD558;&#xB294;&#xB370; &#xC0AC;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xC73C;&#xBBC0;&#xB85C;
 &#xCCAB; &#xBC88;&#xC9F8;&#xC640; &#xB450; &#xBC88;&#xC9F8; <code>foo</code> &#xB294; &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xC9C0;&#xB9CC; &#xC138; &#xBC88;&#xC9F8;&#xC758; <code>_foo</code> &#xC640; &#xB124; &#xBC88;&#xC9F8;&#xC758; <code>foo_</code>
 &#xB294; &#xAC01;&#xAC01; <code>foo</code> &#xC640;&#xB294; &#xB2E4;&#xB978; &#xB9E4;&#xD06C;&#xB85C; &#xC774;&#xB984;&#xC774; &#xB418;&#xBBC0;&#xB85C; &#xD655;&#xC7A5;&#xB418;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define foo bar()
 
 foo-&gt;files          # &apos;-&apos; &#xBB38;&#xC790;&#xB294; &#xB9E4;&#xD06C;&#xB85C; &#xC774;&#xB984;&#xC5D0; &#xC0AC;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;.
@@ -668,7 +668,7 @@ foo_-&gt;files
 <blockquote>
 <p>backslash-newline &#xC740; <code>\</code> &#xB97C; &#xC774;&#xC6A9;&#xD574; newline &#xC744; escape &#xD558;&#xB294;&#xAC83;&#xC744; &#xB9D0;&#xD569;&#xB2C8;&#xB2E4;.</p>
 </blockquote>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define WARN_IF(EXP) \
 do { if (EXP) \
         fprintf (stderr, &quot;Warning: &quot; #EXP &quot;\n&quot;); } \
@@ -680,7 +680,7 @@ WARN_IF(x == 0);
 do { if (x == 0) fprintf (stderr, &quot;Warning: &quot; &quot;x == 0&quot; &quot;\n&quot;); } while (0);
 </code></pre><h4 id="&#xB9E4;&#xD06C;&#xB85C;&#xB294;-&#xC815;&#xC758;&#xB41C;-&#xC21C;&#xC11C;&#xC5D0;-&#xB530;&#xB77C;-&#xCC98;&#xB9AC;&#xB429;&#xB2C8;&#xB2E4;">&#xB9E4;&#xD06C;&#xB85C;&#xB294; &#xC815;&#xC758;&#xB41C; &#xC21C;&#xC11C;&#xC5D0; &#xB530;&#xB77C; &#xCC98;&#xB9AC;&#xB429;&#xB2C8;&#xB2E4;.</h4>
 <p>&#xB530;&#xB77C;&#xC11C; &#xB2E4;&#xC74C;&#xC758; &#xACBD;&#xC6B0; <code>foo = AA</code> &#xB294; &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;. </p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 foo = AA;
 #define AA 100
 bar = AA;
@@ -690,7 +690,7 @@ foo = AA;
 bar = 100;
 </code></pre><p>TABLESIZE &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC815;&#xC758;&#xB420; &#xB2F9;&#xC2DC; BUFSIZE &#xB294; 1024 &#xC774;&#xC9C0;&#xB9CC; &#xC774;&#xD6C4;&#xC5D0; BUFSIZE &#xAC00; &#xC7AC;&#xC815;&#xC758;&#xB418;&#xC5B4;
 TABLESIZE &#xB294; 4096 &#xC73C;&#xB85C; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define BUFSIZE 1024
 #define TABLESIZE BUFSIZE
 #undef BUFSIZE
@@ -703,7 +703,7 @@ TABLESIZE                // &#xD604;&#xC7AC; &#xC704;&#xCE58;&#xC5D0;&#xC11C; TA
 </code></pre><h4 id="&#xB9E4;&#xD06C;&#xB85C;-&#xD655;&#xC7A5;&#xC740;-terminal-token-&#xC774;-&#xB098;&#xC62C;-&#xB54C;&#xAE4C;&#xC9C0;-&#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;">&#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5;&#xC740; terminal token &#xC774; &#xB098;&#xC62C; &#xB54C;&#xAE4C;&#xC9C0; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;.</h4>
 <p>TABLESIZE &#xB294; BUFSIZE &#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xACE0;, &#xADF8;&#xB2E4;&#xC74C; BUFSIZE &#xB294; SIZE_1 &#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xACE0; 
 SIZE_1 &#xB294; &#xCD5C;&#xC885;&#xC801;&#xC73C;&#xB85C; terminal token &#xC5D0; &#xD574;&#xB2F9;&#xD558;&#xB294; 1024 &#xB85C; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define TABLESIZE BUFSIZE
 #define BUFSIZE SIZE_1
 #define SIZE_1 1024
@@ -714,7 +714,7 @@ TABLESIZE
 1024             # TABLESIZE ---&gt; BUFSIZE ---&gt; SIZE_1 ---&gt; 1024
 </code></pre><p><code>current-&gt;files</code> &#xC5D0;&#xC11C; current &#xB294; <code>get_current()</code> &#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xACE0; 
 &#xB2E4;&#xC2DC; <code>get_current()</code> &#xB294; <code>(current_thread_info()-&gt;task)</code> &#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define get_current() (current_thread_info()-&gt;task)
 #define current get_current()
 
@@ -732,7 +732,7 @@ int __get_unused_fd_flags(unsigned flags, unsigned long nofile)
 &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB97C; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74; &#xB9E4;&#xCE6D;&#xB418;&#xB294; &#xB9E4;&#xD06C;&#xB85C; <code>DEFINE_XARRAY_FLAGS</code> &#xAC00; &#xC874;&#xC7AC;&#xD558;&#xBBC0;&#xB85C; 
 <code>struct xarray name = XARRAY_INIT(foobar, 0)</code> &#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xACE0;,
 &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB97C; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74; &#xB9E4;&#xCE6D;&#xB418;&#xB294; &#xB9E4;&#xD06C;&#xB85C; <code>XARRAY_INIT</code> &#xAC00; &#xC874;&#xC7AC;&#xD558;&#xBBC0;&#xB85C; &#xB2E4;&#xC2DC; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define XARRAY_INIT(name, flags) { \
     .xa_lock = __SPIN_LOCK_UNLOCKED(name.xa_lock), \
     .xa_flags = flags, \
@@ -753,7 +753,7 @@ struct xarray foobar = { .xa_lock = __SPIN_LOCK_UNLOCKED(foobar.xa_lock),
 <p>&#xB9E4;&#xD06C;&#xB85C;&#xB294; terminal token &#xC774; &#xB098;&#xC62C; &#xB54C;&#xAE4C;&#xC9C0; &#xC5F0;&#xC774;&#xC5B4;&#xC11C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xB294;&#xB370;
 &#xADF8;&#xC911;&#xC5D0; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB85C; &#xC790;&#xAE30; &#xC790;&#xC2E0;&#xC774; &#xB098;&#xC624;&#xAC8C; &#xB418;&#xBA74; &#xB354; &#xC774;&#xC0C1; &#xD655;&#xC7A5;&#xB418;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.
 ( &#xBB3C;&#xB860; &#xB2E4;&#xB978; &#xB9E4;&#xD06C;&#xB85C;&#xB294; &#xACC4;&#xC18D; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;. )</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define foo (4 + foo)
 
 foo
@@ -763,7 +763,7 @@ foo
 
 -----------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define x (4 + y)
 #define y (2 * x)
 
@@ -774,7 +774,7 @@ x                           1. x        ---&gt;  (4 + y) &#xB85C; &#xD655;&#xC7A
 
 -----------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define foo bar
 #define bar foo 200
 
@@ -788,7 +788,7 @@ foo 200 bar 200                bar &#xC790;&#xC2E0;&#xC740; &#xB354;&#xC774;&#xC
 
 --------------------
 
-$ gcpp &lt;&lt;\@                                    $ gcpp &lt;&lt;\@
+$ gcpp                                         $ gcpp
 #define EPERM                                  #define EPERM EPERM
 
 #ifdef EPERM                                   #ifdef EPERM
@@ -819,7 +819,7 @@ enum __socket_type
 </blockquote>
 <pre><code># &#xB3D9;&#xC77C;&#xD55C; &#xC774;&#xB984;&#xC758; &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC7AC;&#xC815;&#xC758;&#xB418;&#xC5B4; warning &#xC774; &#xBC1C;&#xC0DD;&#xD55C;&#xB2E4;.
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define BUFSIZE 1024
 #define BUFSIZE 4096
 
@@ -853,7 +853,7 @@ BUFSIZE
 </code></pre><h4 id="gcc-&#xBA85;&#xB839;-&#xB77C;&#xC778;&#xC5D0;&#xC11C;&#xB3C4;-&#xB9E4;&#xD06C;&#xB85C;&#xB97C;-&#xC815;&#xC758;&#xD560;-&#xC218;-&#xC788;&#xC2B5;&#xB2C8;&#xB2E4;">gcc &#xBA85;&#xB839; &#xB77C;&#xC778;&#xC5D0;&#xC11C;&#xB3C4; &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC815;&#xC758;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</h4>
 <p>&#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC815;&#xC758;&#xD560; &#xB54C;&#xB294; <code>-D</code> &#xC635;&#xC158;&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xACE0; <code>=</code> &#xB97C; &#xC774;&#xC6A9;&#xD574; &#xAC12;&#xC744; &#xC9C0;&#xC815;&#xD558;&#xC9C0; &#xC54A;&#xC73C;&#xBA74;
 &#xAE30;&#xBCF8;&#xC801;&#xC73C;&#xB85C; <code>1</code> &#xB85C; &#xC124;&#xC815;&#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-bash">$ gcpp -D __foo -D __bar=<span class="hljs-number">200</span> &lt;&lt;\@
+<pre><code class="lang-bash">$ gcpp -D __foo -D __bar=<span class="hljs-number">200</span>
 <span class="hljs-comment">#ifdef __foo</span>
 <span class="hljs-string">&quot;__foo&quot;</span> is : __foo
 <span class="hljs-string">&quot;__bar&quot;</span> is : __bar

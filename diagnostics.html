@@ -609,7 +609,7 @@
 <blockquote>
 <p>&#xC2DC;&#xC2A4;&#xD15C; &#xD5E4;&#xB354;&#xC5D0;&#xC11C; &#xC9C1;&#xC811; #warning &#xC9C0;&#xC2DC;&#xC790;&#xC5D0; &#xC758;&#xD55C; &#xBA54;&#xC2DC;&#xC9C0;&#xB294; &#xCD9C;&#xB825;&#xB429;&#xB2C8;&#xB2E4;</p>
 </blockquote>
-<pre><code>$ gcpp &lt;&lt;\@ &gt; /dev/null
+<pre><code>$ gcpp &gt; /dev/null
 #define BUFSIZ 1234     // &#xB610;&#xB294; #include &quot;myheader.h&quot;
 #include &lt;stdio.h&gt;             // stdio.h &#xC5D0; &#xB3D9;&#xC77C;&#xD55C; BUFSIZ &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC815;&#xC758;&#xB418;&#xC5B4;
                                // &#xC788;&#xC9C0;&#xB9CC; redefined warning &#xC774; &#xBC1C;&#xC0DD;&#xD558;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;.
@@ -618,7 +618,7 @@ BUFSIZ
           # empty
 ...........................................................................
 
-$ gcpp &lt;&lt;\@ &gt; /dev/null
+$ gcpp &gt; /dev/null
 #include &lt;stdio.h&gt;             // #define &#xC744; &#xC2DC;&#xC2A4;&#xD15C; &#xD5E4;&#xB354; &#xC544;&#xB798;&#xB85C; &#xB0B4;&#xB824;&#xC57C;
 #define BUFSIZ 1234            // &#xAE30;&#xC874;&#xACFC; &#xAC19;&#xC774; warning &#xC774; &#xBC1C;&#xC0DD;&#xD569;&#xB2C8;&#xB2E4;.
 

@@ -572,7 +572,7 @@
 <p><code>#ifdef</code>, <code>#ifndef</code> &#xC9C0;&#xC2DC;&#xC790;&#xB294; &#xD2B9;&#xC815; &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xD604;&#xC7AC; &#xC815;&#xC758;&#xB418;&#xC5B4; &#xC788;&#xB294;&#xC9C0; &#xD14C;&#xC2A4;&#xD2B8;&#xD560; &#xB54C;
 &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.
 &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; object-like &#xB9E4;&#xD06C;&#xB85C;, function-like &#xB9E4;&#xD06C;&#xB85C; &#xBAA8;&#xB450; <code>#ifdef</code> &#xC5D0;&#xC11C; &#xCC38;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@                 $ gcpp &lt;&lt;\@                    $ gcpp &lt;&lt;\@
+<pre><code>$ gcpp                      $ gcpp                         $ gcpp
 #define foo                 #define foo 100                #define foo()
 
 #ifdef foo                  #ifdef foo                     #ifdef foo
@@ -633,7 +633,7 @@ expression &#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xB294; &
 <li>&#xC815;&#xC758;&#xB418;&#xC9C0; &#xC54A;&#xC740; &#xB9E4;&#xD06C;&#xB85C;&#xB294; <code>0</code> &#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.</li>
 <li>double quotes &#xC740; &#xC624;&#xB958;&#xC5D0; &#xD574;&#xB2F9;&#xD569;&#xB2C8;&#xB2E4;.</li>
 </ul>
-<pre><code>$ gcpp &lt;&lt;\@          $ gcpp &lt;&lt;\@               $ gcpp &lt;&lt;\@          $ gcpp -Dfoo &lt;&lt;\@
+<pre><code>$ gcpp               $ gcpp                    $ gcpp               $ gcpp -Dfoo
 #if foo              #define foo               #define foo bar      #if foo
 #define NUM 100      #if foo                   #if foo              #define NUM 200
 #endif               #define NUM 200           #define NUM 200      #endif
@@ -648,7 +648,7 @@ value: NUM           &lt;stdin&gt;:2:8: error:                            value:
 # 0 &#xACFC; &#xAC19;&#xB2E4;.                                     # &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xB41C;&#xB2E4;.
 ----------------------------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@                       $ gcpp &lt;&lt;\@                    $ gcpp &lt;&lt;\@ 
+$ gcpp                            $ gcpp                         $ gcpp
 #define foo                       #define foo (1 - 1)            #define foo (1 + 1)
 #if defined(foo)                  #if foo                        #if foo
 #define NUM 200                   #define NUM 200                #define NUM 100
@@ -660,7 +660,7 @@ value: NUM                        value: NUM                     value: NUM
 value: 200                        value: NUM                     value: 100
 -------------------------------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@                       $ gcpp &lt;&lt;\@                     $ gcpp &lt;&lt;\@
+$ gcpp                            $ gcpp                          $ gcpp
 #define foo &quot;bar&quot;                 #define foo &apos;bar&apos;               #define foo &apos;b&apos;
 #if foo                           #if foo                         #if foo
 #define NUM 200                   #define NUM 200                 #define NUM 200
@@ -701,7 +701,7 @@ logical not &#xC740; &#xC55E;&#xC5D0; <code>!</code> &#xB97C; &#xBD99;&#xC774;&#
 <h2 id="else">#else</h2>
 <p><code>#else</code> &#xC9C0;&#xC2DC;&#xC790;&#xB294; <code>#if</code>, <code>#elif</code> &#xBFD0;&#xB9CC; &#xC544;&#xB2C8;&#xB77C; <code>#ifdef</code>, <code>#ifndef</code> &#xC9C0;&#xC2DC;&#xC790; &#xC640;&#xB3C4; &#xD568;&#xAED8; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
 <p><code>#if</code> , <code>#else</code> &#xAC00; &#xC911;&#xCCA9;&#xB420; &#xACBD;&#xC6B0; &#xC801;&#xC6A9;&#xB418;&#xB294; &#xC21C;&#xC11C;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-c">$ gcpp &lt;&lt;\@
+<pre><code class="lang-c">$ gcpp
 <span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> FEATURE_A</span>
 
 <span class="hljs-preprocessor">#<span class="hljs-keyword">if</span> defined (FEATURE_A)</span>

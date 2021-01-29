@@ -600,7 +600,7 @@ quotes &#xC744; &#xC0AC;&#xC6A9;&#xD560; &#xACBD;&#xC6B0;&#xB294; <code>&quot;</
 INC ( increment ) &#xD558;&#xBA74; 11 &#xC774; &#xB418;&#xC9C0;&#xB9CC; &#xB9E4;&#xD06C;&#xB85C;&#xC5D0;&#xC11C;&#xB294;
 INC &#xD55C; &#xACB0;&#xACFC;&#xB97C; &#xC5BB;&#xC73C;&#xB824;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xC9C1;&#xC811; &#xBAA8;&#xB4E0; &#xACB0;&#xACFC;&#xAC12;&#xC5D0; &#xB300;&#xD574; &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xB97C; &#xD574;&#xC8FC;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.
 ( &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xB2E4;&#xB8F0; &#xB54C;&#xB294; &#xC57D;&#xAC04; &#xBC1C;&#xC0C1;&#xC758; &#xC804;&#xD658;&#xC774; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;. )</p>
-<pre><code>$ gcpp &lt;&lt;\@                            $ gcpp &lt;&lt;\@
+<pre><code>$ gcpp                                 $ gcpp
 #define JOIN(x, y) x ## y              #define JOIN(x, y) x ## y
 #define INC(x) JOIN(INC_, x)           #define DEC(x) JOIN(DEC_, x)
 #define INC_0 1                        #define DEC_1 0
@@ -621,7 +621,7 @@ INC(3)                                 DEC(3)
 </code></pre><h4 id="&#xB9E4;&#xD06C;&#xB85C;-&#xD14C;&#xC2A4;&#xD2B8;&#xC5D0;-&#xC0AC;&#xC6A9;&#xB418;&#xB294;-gcpp-&#xBA85;&#xB839;">&#xB9E4;&#xD06C;&#xB85C; &#xD14C;&#xC2A4;&#xD2B8;&#xC5D0; &#xC0AC;&#xC6A9;&#xB418;&#xB294; gcpp &#xBA85;&#xB839;</h4>
 <p>&#xBCF8;&#xBB38; &#xC804;&#xCCB4;&#xC5D0; &#xAC78;&#xCCD0; &#xB9E4;&#xD06C;&#xB85C; &#xD14C;&#xC2A4;&#xD2B8;&#xC5D0; <code>gcpp</code> &#xBA85;&#xB839;&#xC774; &#xC0AC;&#xC6A9;&#xB418;&#xB294;&#xB370; &#xC774;&#xAC83;&#xC740; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; 
 bash shell alias  &#xC785;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-bash">$ <span class="hljs-built_in">alias</span> gcpp=<span class="hljs-string">&apos;gcc -E -P -&apos;</span>
+<pre><code class="lang-bash">$ <span class="hljs-built_in">alias</span> gcpp=<span class="hljs-string">&apos;gcc -E -P - &lt;&lt;\@&apos;</span>
 
 <span class="hljs-comment"># -P &#xC635;&#xC158;&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xBA74; &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5;&#xC2DC; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; linemarkers &#xAC00; &#xCD9C;&#xB825;&#xB418;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
 

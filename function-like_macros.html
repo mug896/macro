@@ -564,7 +564,7 @@ function-like &#xB9E4;&#xD06C;&#xB85C;&#xB294; &#xC774;&#xB984; &#xB4A4;&#xC5D0;
 &#xB9E4;&#xD06C;&#xB85C;&#xB97C; #define &#xD560;&#xB54C; &#xD55C;&#xAC00;&#xC9C0; &#xC8FC;&#xC758;&#xD560; &#xC810;&#xC740; &#xB9E4;&#xD06C;&#xB85C; &#xC774;&#xB984;&#xACFC; &#xAD04;&#xD638; &#xC0AC;&#xC774;&#xC5D0; &#xACF5;&#xBC31;&#xC774; &#xC624;&#xBA74; &#xC548;&#xB429;&#xB2C8;&#xB2E4;
 ( &#xADF8;&#xB7EC;&#xBA74; object-like &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xB429;&#xB2C8;&#xB2E4; ).
 &#xD558;&#xC9C0;&#xB9CC; &#xB9E4;&#xD06C;&#xB85C; &#xC0AC;&#xC6A9; &#xC2DC;&#xC5D0;&#xB294; &#xC774;&#xB984;&#xACFC; &#xAD04;&#xD638; &#xC0AC;&#xC774;&#xC5D0; &#xACF5;&#xBC31;&#xC774; &#xC62C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))     // OK
 
 ARRAY_SIZE(myarr)       // OK
@@ -578,7 +578,7 @@ ARRAY_SIZE  (myarr)     // OK     &#xC774;&#xB984;&#xACFC; &#xAD04;&#xD638; &#xC
 # &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xC2DC; &#xC774;&#xB984;&#xACFC; &#xAD04;&#xD638; &#xC0AC;&#xC774;&#xC5D0; &#xACF5;&#xBC31;&#xC744; &#xB450;&#xC5B4; object-like &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xB418;&#xC5B4;
 # ARRAY_SIZE &#xAC12;&#xC774; (x) (sizeof(x) / sizeof((x)[0])) &#xAC00; &#xB41C;&#xB2E4;.
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define ARRAY_SIZE (x) (sizeof(x) / sizeof((x)[0]))       // WRONG !
 
 ARRAY_SIZE(myarr)
@@ -589,7 +589,7 @@ ARRAY_SIZE(myarr)
 <p>&#xAE30;&#xBCF8;&#xC801;&#xC73C;&#xB85C; &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xC5D0; &#xC0AC;&#xC6A9;&#xB41C; &#xB9E4;&#xAC1C;&#xBCC0;&#xC218; &#xAC1C;&#xC218;&#xC640; &#xC804;&#xB2EC;&#xB418;&#xB294; &#xC778;&#xC218;&#xC758; &#xAC1C;&#xC218;&#xAC00; &#xB9DE;&#xC544;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.
 &#xADF8;&#xB807;&#xC9C0; &#xC54A;&#xC73C;&#xBA74; &#xC624;&#xB958;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.
 &#xC778;&#xC218; &#xAC12;&#xC740; empty &#xAC00; &#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@                              $ gcpp &lt;&lt;\@
+<pre><code>$ gcpp                                   $ gcpp
 #define FOOBAR(a,b) foo a b bar          #define FOOBAR(a,b) foo a b bar
 
 FOOBAR(100,200)                          FOOBAR(100,)    // OK
@@ -598,7 +598,7 @@ FOOBAR(100,200)                          FOOBAR(100,)    // OK
 foo 100 200 bar                          foo 100 bar
 --------------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@                              $ gcpp &lt;&lt;\@
+$ gcpp                                   $ gcpp
 #define FOOBAR(a,b) foo a b bar          #define FOOBAR(a,b) foo a b bar 
 
 FOOBAR(,200)     // OK                   FOOBAR(,)       // OK &#xC778;&#xC218;&#xAC12;&#xC740; empty &#xAC00; &#xB420;&#xC218;&#xC788;&#xB2E4;.
@@ -607,7 +607,7 @@ FOOBAR(,200)     // OK                   FOOBAR(,)       // OK &#xC778;&#xC218;&
 foo 200 bar                              foo bar
 --------------------------------------------------------------------
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define FOOBAR(a,b) foo a b bar
 
 FOOBAR()     // &#xC778;&#xC218; &#xAC1C;&#xC218;&#xAC00; &#xB9E4;&#xAC1C;&#xBCC0;&#xC218; &#xAC1C;&#xC218;&#xC640; &#xB9DE;&#xC9C0; &#xC54A;&#xC73C;&#xBA74; &#xC624;&#xB958;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.
@@ -615,14 +615,14 @@ FOOBAR()     // &#xC778;&#xC218; &#xAC1C;&#xC218;&#xAC00; &#xB9E4;&#xAC1C;&#xBCC
 
 &lt;stdin&gt;:3:5: error: macro &quot;FOOBAR&quot; requires 2 arguments, but only 1 given
 </code></pre><p>Quote &#xC744; &#xD558;&#xBA74; &#xD558;&#xB098;&#xC758; &#xC778;&#xC218;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define FOOBAR(a, b) foo a b bar
 
 FOOBAR( &quot;100, 200&quot; )                // quote &#xC744; &#xD558;&#xC5EC; &#xD558;&#xB098;&#xC758; &#xC778;&#xC218;&#xAC00; &#xB41C;&#xB2E4;.
 @
 &lt;stdin&gt;:3:20: error: macro &quot;FOOBAR&quot; requires 2 arguments, but only 1 given
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define FOOBAR(a, b) foo a b bar
 
 FOOBAR( &apos;100, 200&apos; )                // single quotes
@@ -632,7 +632,7 @@ FOOBAR( &apos;100, 200&apos; )                // single quotes
 <p>&#xB2E4;&#xC74C;&#xC758; &#xACBD;&#xC6B0;&#xB97C; &#xBCF4;&#xBA74; <code>TEST(ch)</code> &#xB294; <code>((SMALLCASE(ch)) || (UPPERCASE(ch)))</code> &#xB85C; &#xD655;&#xC7A5;&#xB418;&#xB294;&#xB370;
 &#xC774;&#xC804;&#xC5D0; <code>SMALLCASE(X)</code> &#xC640; <code>UPPERCASE(X)</code> &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xAC00; &#xC874;&#xC7AC;&#xD558;&#xBBC0;&#xB85C; 
 &#xB2E4;&#xC2DC; &#xD655;&#xC7A5;&#xC774; &#xC774;&#xB8E8;&#xC5B4;&#xC9D1;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define SMALLCASE(X) (((X)&gt;=&apos;a&apos;) &amp;&amp; ((X)&lt;=&apos;z&apos;))
 #define UPPERCASE(X) (((X)&gt;=&apos;A&apos;) &amp;&amp; ((X)&lt;=&apos;Z&apos;))
 #define TEST(X) ((SMALLCASE(X)) || (UPPERCASE(X)))
@@ -650,7 +650,7 @@ if ((((((ch)&gt;=&apos;a&apos;) &amp;&amp; ((ch)&lt;=&apos;z&apos;))) || ((((ch)
     printf(&quot;Entered character isn&apos;t an alphabet\n&quot;);
 }
 </code></pre><p><code>call_with_1(twice)</code> &#xB294; <code>twice(1)</code> &#xB85C; &#xD655;&#xC7A5;&#xB418;&#xB294;&#xB370; &#xC774;&#xC804;&#xC5D0; <code>twice(x)</code> &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xAC00; &#xC874;&#xC7AC;&#xD558;&#xBBC0;&#xB85C; &#xB2E4;&#xC2DC; <code>(2 * (1))</code> &#xB85C; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define twice(x) (2 * (x))
 #define call_with_1(x) x(1)
 
@@ -660,7 +660,7 @@ call_with_1 (twice)     ----&gt;  twice(1) &#xB85C; &#xD655;&#xC7A5;  ----&gt;  
 (2 * (1))
 </code></pre><p><code>#include &lt;sys/select.h&gt;</code> &#xC5D0; &#xC815;&#xC758;&#xB418;&#xC5B4; &#xC788;&#xB294; &#xB9E4;&#xD06C;&#xB85C;&#xB85C;
 <code>FD_SET(foo, &amp;bar)</code> &#xB294; &#xD130;&#xBBF8;&#xB110; &#xD1A0;&#xD070;&#xC774; &#xB098;&#xC62C; &#xB54C;&#xAE4C;&#xC9C0; &#xC5F0;&#xC774;&#xC5B4;&#xC11C; &#xD655;&#xC7A5;&#xC774; &#xC774;&#xB8E8;&#xC5B4;&#xC9D1;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define FD_SET(fd,fdsetp) __FD_SET (fd, fdsetp)
 #define __FD_SET(d,s) ((void) (__FDS_BITS (s)[__FD_ELT(d)] |= __FD_MASK(d)))
 #define __FDS_BITS(set) ((set)-&gt;__fds_bits)
@@ -679,7 +679,7 @@ FD_SET(foo, &amp;bar);     // fd foo &#xB97C; fd_set bar &#xC5D0; &#xB354;&#xD55
 ((void) (((&amp;bar)-&gt;__fds_bits)[((foo) / (8 * (int) sizeof (__fd_mask)))] |= ((__fd_mask) 
 (1UL &lt;&lt; ((foo) % (8 * (int) sizeof (__fd_mask)))))));
 </code></pre><h4 id="statement-&#xC758;-&#xD2B9;&#xC815;-&#xBD80;&#xBD84;&#xB9CC;-&#xB9E4;&#xD06C;&#xB85C;&#xB85C;-&#xC815;&#xC758;&#xD574;-&#xC0AC;&#xC6A9;&#xD560;-&#xC218;&#xB3C4;-&#xC788;&#xC2B5;&#xB2C8;&#xB2E4;">Statement &#xC758; &#xD2B9;&#xC815; &#xBD80;&#xBD84;&#xB9CC; &#xB9E4;&#xD06C;&#xB85C;&#xB85C; &#xC815;&#xC758;&#xD574; &#xC0AC;&#xC6A9;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</h4>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define foo(file) fprintf (file, &quot;%s %d&quot;,
 
 foo(stderr) p, 35)
@@ -695,7 +695,7 @@ fprintf (stderr, &quot;%s %d&quot;, p, 35)
 &#xAD04;&#xD638;&#xCC98;&#xB9AC;&#xB97C; &#xD558;&#xC9C0; &#xC54A;&#xC544; &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xAC00; &#xC5F0;&#xC0B0;&#xC790; &#xC6B0;&#xC120;&#xC21C;&#xC704;&#xB97C; &#xACE0;&#xB824;&#xD588;&#xC744; &#xB54C; <code>(1)</code> &#xBC88;&#xACFC;
 &#xAC19;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;. &#xC774;&#xAC83;&#xC740; &#xACB0;&#xACFC;&#xC801;&#xC73C;&#xB85C; &#xD2C0;&#xB9B0; &#xC2DD;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.
 <code>(2)</code> &#xBC88;&#xACFC; &#xAC19;&#xC544;&#xC57C; &#xC62C;&#xBC14;&#xB978; &#xC2DD;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define ceil_div(x, y) (x + y - 1) / y
 
 res = ceil_div (b &amp; c, sizeof (int));
@@ -707,7 +707,7 @@ res = (b &amp; (c + sizeof (int) - 1)) / sizeof (int);        ----- (1)
 
 res = ((b &amp; c) + sizeof (int) - 1)) / sizeof (int);       ----- (2)
 </code></pre><p>&#xB530;&#xB77C;&#xC11C; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; <code>x</code>, <code>y</code>  &#xB9E4;&#xAC1C;&#xBCC0;&#xC218;&#xC5D0; &#xAD04;&#xD638;&#xCC98;&#xB9AC;&#xB97C; &#xD574;&#xC8FC;&#xBA74; &#xC62C;&#xBC14;&#xB978; &#xC2DD;&#xC774; &#xCD9C;&#xB825;&#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define ceil_div(x, y) ((x) + (y) - 1) / (y)           // x, y &#xB9E4;&#xAC1C;&#xBCC0;&#xC218; &#xAD04;&#xD638;&#xCC98;&#xB9AC;
 
 a = ceil_div (b &amp; c, sizeof (int));
@@ -724,7 +724,7 @@ sizeof ((x) + (y) - 1) / (y)         # sizeof &#xC5D0;&#xC11C; / (y) &#xAC00; &#
 
 ----------------------------
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define ceil_div(x, y) (((x) + (y) - 1) / (y))      // &#xC804;&#xCCB4; &#xC2DD;&#xB3C4; &#xAD04;&#xD638;&#xCC98;&#xB9AC;
 
 sizeof ceil_div(x, y)
@@ -735,7 +735,7 @@ sizeof (((x) + (y) - 1) / (y))
 <p>&#xB9CC;&#xC57D;&#xC5D0; <code>min(X, Y)</code> &#xB9E4;&#xD06C;&#xB85C;&#xAC00; C/C++ &#xD568;&#xC218;&#xB77C;&#xBA74; &#xC778;&#xC218;&#xC5D0; &#xC0AC;&#xC6A9;&#xB41C; <code>x++</code> &#xC640; <code>foo(y)</code> &#xB294; 
 min &#xD568;&#xC218; &#xC2E4;&#xD589;&#xC804;&#xC5D0; &#xD55C;&#xBC88;&#xB9CC; &#xC2E4;&#xD589;&#xC774; &#xB418;&#xC9C0;&#xB9CC; &#xB9E4;&#xD06C;&#xB85C;&#xC758; &#xACBD;&#xC6B0;&#xB294; expression &#xC774; &#xADF8;&#xB300;&#xB85C; &#xC804;&#xB2EC;&#xB418;&#xC5B4;
 &#xCE58;&#xD658;&#xB418;&#xBBC0;&#xB85C; &#xC544;&#xB798; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xC5D0;&#xC11C; &#xBCFC; &#xC218; &#xC788;&#xB4EF;&#xC774; &#xD574;&#xB2F9; expression &#xC774; &#xC5EC;&#xB7EC;&#xBC88; &#xC2E4;&#xD589;&#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define min(X, Y)  ((X) &lt; (Y) ? (X) : (Y))
 
 next = min (x++, foo(y));
@@ -821,7 +821,7 @@ foobar (array[(x = y, x + 1)])       // array[(x = y, x + 1)] &#xD55C; &#xAC1C;&
 <p>&#xB2E4;&#xC74C; JOIN &#xB9E4;&#xD06C;&#xB85C;&#xB294; &#xC778;&#xC218;&#xB85C; &#xC804;&#xB2EC;&#xB41C; type &#xACFC; name &#xC744; &#xD558;&#xB098;&#xB85C; &#xD569;&#xCE58;&#xB294; &#xC5ED;&#xD560;&#xC744; &#xD569;&#xB2C8;&#xB2E4;.
 &#xADF8;&#xB7F0;&#xB370; &#xC778;&#xC218;&#xB85C; &#xC804;&#xB2EC;&#xB418;&#xB294; type &#xAC12;&#xC5D0; <code>,</code> &#xAC00; &#xD3EC;&#xD568;&#xB420; &#xC218; &#xC788;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; 
 &#xBCC4;&#xB3C4;&#xC758; UNPACK &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC815;&#xC758;&#xD558;&#xC5EC; &#xCC98;&#xB9AC;&#xD558;&#xB294; &#xC608;&#xC785;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define UNPACK( ... ) __VA_ARGS__
 #define JOIN( type, name ) UNPACK type name
 
@@ -837,7 +837,7 @@ std::map&lt;int, int&gt; map_var;
    ----&gt;  std::map&lt;int, int&gt; &#xB85C; &#xD655;&#xC7A5;&#xB418;&#xC5B4; 
 3. &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xB294; std::map&lt;int, int&gt; map_var; &#xAC00; &#xB429;&#xB2C8;&#xB2E4;.
 </code></pre><p>&#xB610;&#xB294; COMMA &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC815;&#xC758;&#xD574; &#xC0AC;&#xC6A9;</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define COMMA ,
 #define FOO( type, name ) type name
 
@@ -900,7 +900,7 @@ while ( kfifo_len( &amp;line6-&gt;messages.fifo) == 0) {      // &#xC624;&#xB958
 <p>&#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xC5D0; &#xB530;&#xB77C; &#xD568;&#xC218;&#xC5D0; &#xD568;&#xC218;&#xAC00; &#xC5F0;&#xC774;&#xC5B4; &#xC5F0;&#xACB0;&#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.
 &#xB2E4;&#xC74C;&#xC758; &#xACBD;&#xC6B0; <code>concat (foo, bar)</code> &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xD655;&#xC7A5;&#xB418;&#xBA74; &#xACB0;&#xACFC;&#xAC00; <code>foobar</code> &#xAC00; &#xB418;&#xB294;&#xB370; 
 <code>foobar (100)</code> &#xB294; &#xB2E4;&#xC2DC; <code>foobar(a)</code> &#xB9E4;&#xD06C;&#xB85C;&#xC640; &#xB9E4;&#xCE6D;&#xC774; &#xB418;&#xBBC0;&#xB85C; &#xC5F0;&#xC774;&#xC5B4; &#xD655;&#xC7A5;&#xC774; &#xC77C;&#xC5B4;&#xB098;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define concat(a, b) a ## b
 #define foobar(a) a + 1
 
@@ -909,7 +909,7 @@ concat (foo, bar) (100)         //  ---&gt;  foobar (100)  ---&gt;  100 + 1
 
 100 + 1
 </code></pre><p>&#xC774;&#xAC83;&#xC744; &#xD65C;&#xC6A9;&#xD558;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; <code>if ~ else</code> &#xB97C; &#xB9CC;&#xB4E4; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define IF_1(true, ...) true
 #define IF_0(true, ...) __VA_ARGS__
 #define IF(value) IF_ ## value

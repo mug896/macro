@@ -583,7 +583,7 @@ foo &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC644;&#xC804;&#xD788; &#xD655;&#xC7A5;&#
 </ol>
 </blockquote>
 <p>lose(x) &#xB9E4;&#xD06C;&#xB85C;&#xB294; &#xD558;&#xB098;&#xC758; &#xC778;&#xC218;&#xB9CC; &#xAC00;&#xC9C0;&#xBBC0;&#xB85C; &#xACB0;&#xACFC;&#xC801;&#xC73C;&#xB85C; lose &#xB9E4;&#xD06C;&#xB85C;&#xC5D0;&#xC11C; &#xC624;&#xB958;&#xAC00; &#xBC1C;&#xC0DD;&#xD558;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define foo  a,b
 #define bar(x) lose(x)
 #define lose(x) (1 + (x))
@@ -596,7 +596,7 @@ bar(foo)
 ---------------------------------------------------------------------
 
 # lose &#xB9E4;&#xD06C;&#xB85C;&#xC5D0;&#xC11C; &#xC624;&#xB958;&#xAC00; &#xB098;&#xC9C0; &#xC54A;&#xAC8C; &#xD558;&#xB824;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB9E4;&#xAC1C;&#xBCC0;&#xC218;&#xC5D0; ( ) &#xB97C; &#xCD94;&#xAC00;&#xD574; &#xC8FC;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define foo  a,b
 #define bar(x) lose((x))       // lose(x) ---&gt; lose((x)) &#xB85C; &#xBCC0;&#xACBD;&#xD558;&#xBA74;
 #define lose(x) (1 + (x))      // a,b &#xB450;&#xAC1C;&#xC758; &#xC778;&#xC218;&#xAC00; (a,b) &#xD558;&#xB098;&#xC758; &#xC778;&#xC218;&#xB85C; &#xB41C;&#xB2E4;.
@@ -612,7 +612,7 @@ bar(foo)
 &#xBA3C;&#xC800; <code>bar(2)</code> &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xBA74; <code>##</code> &#xC5F0;&#xC0B0;&#xC790;&#xC5D0; &#xC758;&#xD574; &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xAC00; <code>lose(foo_2)</code> &#xAC00; &#xB418;&#xB294;&#xB370;
 &#xC5EC;&#xAE30;&#xC11C; main scan &#xC774; &#xC77C;&#xC5B4;&#xB098;&#xBA74; <code>lose(foo_2)</code> &#xC0C1;&#xD0DC;&#xC5D0;&#xC11C; &#xB2E4;&#xC2DC; &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xD655;&#xC7A5;&#xB418;&#xB294; &#xAC83;&#xC774;&#xC9C0;
 <code>lose(foo_2) ---&gt; lose(a,b)</code> &#xAC00; &#xB418;&#xB294;&#xAC83;&#xC774; &#xC544;&#xB2D9;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define foo_2  a,b
 #define bar(x) lose(foo_ ## x)     // lose(foo_2) &#xC0C1;&#xD0DC;&#xC5D0;&#xC11C; main scan &#xC774; &#xBC1C;&#xC0DD;&#xD55C;&#xB2E4;.
 #define lose(x) (1 + (x))
@@ -639,7 +639,7 @@ JOIN &#xB9E4;&#xD06C;&#xB85C;&#xB294; &#xC778;&#xC218;&#xB85C; &#xC804;&#xB2EC;&
 <blockquote>
 <p><code>std::map&lt;int, int&gt; map_var;</code> &#xAC00; &#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</p>
 </blockquote>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define UNPACK(...) __VA_ARGS__
 #define TYPE(...) ( __VA_ARGS__ )          // &#xC804;&#xB2EC;&#xB41C; &#xC778;&#xC218;&#xC5D0; &#xAD04;&#xD638;&#xB97C; &#xCD94;&#xAC00;&#xD558;&#xB294; &#xB9E4;&#xD06C;&#xB85C;
 #define JOIN( type, name ) UNPACK type name
@@ -652,7 +652,7 @@ std::map&lt;int, int&gt; map_var;
 <p>&#xB2E4;&#xC74C; FOO &#xB9E4;&#xD06C;&#xB85C;&#xC5D0; foo, bar &#xC778;&#xC218;&#xAC00; &#xC804;&#xB2EC;&#xB418;&#xBA74; <code>##</code> &#xC5F0;&#xC0B0;&#xC790;&#xC5D0; &#xC758;&#xD574; <code>foobar ()</code>
 &#xB85C; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xACE0; &#xC774;&#xD6C4; main scan &#xC5D0;&#xC758;&#xD574; <code>foobar ()</code> &#xAC00; &#xD655;&#xC7A5;&#xB418;&#xC5B4; &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xB294; <code>100</code> &#xC774; &#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.
 &#xB9CC;&#xC57D;&#xC5D0; main &#xD655;&#xC7A5;&#xC744; &#xBC29;&#xC9C0;&#xD558;&#xACE0; &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xAC00; <code>foobar ()</code> &#xAC00; &#xB418;&#xAC8C; &#xD558;&#xB824;&#xBA74; &#xC5B4;&#xB5BB;&#xAC8C; &#xD560;&#xAE4C;&#xC694;?</p>
-<pre><code>gcpp &lt;&lt;\@
+<pre><code>gcpp
 #define foobar() 100
 #define FOO( name1, name2 ) name1 ## name2 ()
 
@@ -662,7 +662,7 @@ FOO( foo, bar )
 100
 </code></pre><p>&#xC774;&#xB54C;&#xB294; &#xB9E4;&#xD06C;&#xB85C; body &#xAC00; empty &#xC778; &#xC784;&#xC758;&#xC758; &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC120;&#xC5B8;&#xD558;&#xC5EC; 
 ( &#xC5EC;&#xAE30;&#xC11C;&#xB294; <code>NOP()</code> ), &#xB9E4;&#xD06C;&#xB85C; &#xC774;&#xB984;&#xACFC; &#xAD04;&#xD638; &#xC0AC;&#xC774;&#xC5D0; &#xC704;&#xCE58;&#xC2DC;&#xD0A4;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define NOP()              // body &#xAC00; empty &#xC778; &#xB9E4;&#xD06C;&#xB85C;
 #define foobar() 100
 #define FOO( name1, name2 ) name1 ## name2 NOP() ()    // &#xC774;&#xB984;&#xACFC; &#xAD04;&#xD638; &#xC0AC;&#xC774;&#xC5D0; &#xC704;&#xCE58;&#xC2DC;&#xD0A8;&#xB2E4;.
@@ -676,7 +676,7 @@ foobar ()                  // &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5;&#xC774; 
 &#xB9CC;&#xC57D;&#xC5D0; &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xC778; <code>foobar ()</code> &#xB97C; &#xB2E4;&#xC2DC; &#xD655;&#xC7A5;&#xC2DC;&#xD0A4;&#xB824;&#xBA74; &#xC5B4;&#xB5BB;&#xAC8C; &#xD560;&#xAE4C;&#xC694;?
 &#xC774;&#xB54C;&#xB294; EVAL &#xACFC; &#xAC19;&#xC740; &#xC784;&#xC758;&#xC758; &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC815;&#xC758;&#xD558;&#xC5EC; &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xB97C; &#xD55C;&#xBC88;&#xB354; &#xD655;&#xC7A5;&#xC2DC;&#xD0A4;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.
 &#xADF8;&#xB7EC;&#xBA74; &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xAC00; &#xB2E4;&#xC2DC; 100 &#xC774; &#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define NOP()
 #define EVAL(...) __VA_ARGS__       // main scan &#xD655;&#xC7A5;&#xC744; &#xC704;&#xD55C; EVAL &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;
 #define foobar() 100
@@ -692,7 +692,7 @@ EVAL( FOO( foo, bar ) )             // EVAL &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#x
    &#xBA3C;&#xC800; argument prescan &#xC5D0;&#xC758;&#xD574; &#xC644;&#xC804;&#xD788; &#xD655;&#xC7A5;&#xB418;&#xBA74; foobar() &#xAC00; &#xB41C;&#xB2E4;.
 2. &#xD655;&#xC7A5;&#xB41C; &#xACB0;&#xACFC;&#xB294; __VA_ARGS__ &#xC790;&#xB9AC;&#xC5D0; &#xC624;&#xAC8C;&#xB418;&#xACE0; &#xADF8;&#xB2E4;&#xC74C; main scan &#xC774; &#xBC1C;&#xC0DD;&#xD558;&#xBA74;
    100 &#xC73C;&#xB85C; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;.
-</code></pre><pre><code>$ gcpp &lt;&lt;\@
+</code></pre><pre><code>$ gcpp
 #define EVAL(...) x __VA_ARGS__
 
 EVAL( EVAL (EVAL (EVAL ( y ))))
@@ -704,7 +704,7 @@ x x x x y
 double quote &#xC744; &#xD558;&#xB824;&#xACE0; &#xD55C; &#xAC83;&#xC778;&#xB370;&#xC694;. 
 &#xADF8;&#xB7F0;&#xB370; &#xACB0;&#xACFC;&#xB97C; &#xBCF4;&#xBA74; CONCAT &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xD655;&#xC7A5;&#xC774; &#xB418;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.
 &#xC774;&#xAC83;&#xC740; QUOTE &#xB9E4;&#xD06C;&#xB85C;&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xB41C; <code>#x</code> &#xC5F0;&#xC0B0;&#xC790;&#xC5D0; &#xC758;&#xD574; &#xC778;&#xC218;&#xD655;&#xC7A5;&#xC774; &#xC801;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xAE30; &#xB54C;&#xBB38;&#xC785;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define CONCAT(x) x ## bar
 #define QUOTE(x) #x
 
@@ -713,7 +713,7 @@ QUOTE( CONCAT(foo) )
 
 &quot;CONCAT(foo)&quot;
 </code></pre><p>&#xB530;&#xB77C;&#xC11C; CONCAT &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xD655;&#xC7A5; &#xC2DC;&#xD0A4;&#xAE30; &#xC704;&#xD574;&#xC11C;&#xB294; QUOTE &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5;&#xC744; &#xBC29;&#xC9C0;&#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define NOP()
 #define CONCAT(x) x ## bar
 #define QUOTE(x) #x
@@ -723,7 +723,7 @@ QUOTE NOP() ( CONCAT(foo) )
 
 QUOTE ( foobar )
 </code></pre><p>&#xADF8;&#xB7F0;&#xB2E4;&#xC74C; &#xACB0;&#xACFC;&#xC5D0; EVAL &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC801;&#xC6A9;&#xC2DC;&#xD0A4;&#xBA74; CONCAT &#xACFC; QUOTE &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xBAA8;&#xB450; &#xD655;&#xC7A5;&#xC2DC;&#xD0AC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define NOP()                  
 #define EVAL(...) __VA_ARGS__
 #define CONCAT(x) x ## bar
@@ -741,7 +741,7 @@ EVAL( QUOTE NOP() ( CONCAT(foo) ))
    QUOTE(foobar) &#xAC00; &#xC624;&#xAC8C;&#xB418;&#xACE0; &#xADF8;&#xB2E4;&#xC74C; main scan &#xC774; &#xBC1C;&#xC0DD;&#xD558;&#xBA74; &quot;foobar&quot; &#xAC00; &#xB429;&#xB2C8;&#xB2E4;.
 </code></pre><p>&#xB610;&#xB294; QUOTE &#xB9E4;&#xD06C;&#xB85C;&#xC5D0; <code>#</code> &#xC5F0;&#xC0B0;&#xC790;&#xAC00; &#xC0AC;&#xC6A9;&#xB418;&#xC5B4; &#xBC1C;&#xC0DD;&#xD558;&#xB294; &#xBB38;&#xC81C;&#xC774;&#xBBC0;&#xB85C; 
 &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; indirection &#xC744; &#xC774;&#xC6A9;&#xD574;&#xB3C4; <code>CONCAT(foo)</code> &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xD655;&#xC7A5;&#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define CONCAT(x) x ## bar
 #define QUOTE_(x) #x
 #define QUOTE(x) QUOTE_(x)       // &apos;#&apos; &#xC5F0;&#xC0B0;&#xC790;&#xAC00; &#xC5C6;&#xC73C;&#xBBC0;&#xB85C; CONCAT(foo) &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xAC00; &#xC0AC;&#xC6A9;&#xB41C;&#xB2E4;.
@@ -758,7 +758,7 @@ QUOTE ( CONCAT(foo) )
 2. QUOTE_(foobar) &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xD655;&#xC7A5;&#xB418;&#xBA74; #x &#xC5F0;&#xC0B0;&#xC790;&#xC5D0; &#xC758;&#xD574; &quot;foobar&quot; &#xAC00; &#xB41C;&#xB2E4;.
 </code></pre><p><code>NOP()</code> &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC774;&#xC6A9;&#xD55C; &#xD655;&#xC7A5; &#xBC29;&#xC9C0;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; <code>DEFER(...)</code> &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC815;&#xC758;&#xD574; 
 &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define NOP()
 #define DEFER(...) __VA_ARGS__ NOP()
 #define EVAL(...) __VA_ARGS__
@@ -776,7 +776,7 @@ QUOTE (foobar)
 &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xAC00; &#xC0AC;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xAE30; &#xB54C;&#xBB38;&#xC778;&#xB370;&#xC694;.
 &#xC5B4;&#xB5BB;&#xAC8C; &#xD558;&#xBA74; <code>CCC(111,222,333)</code> &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xAC00; &#xC804;&#xB2EC;&#xB418;&#xC5B4; 
 &#xC778;&#xC218;&#xC758; &#xAC1C;&#xC218;&#xAC00; <code>3</code> &#xC774; &#xCD9C;&#xB825;&#xB418;&#xAC8C; &#xD560; &#xC218; &#xC788;&#xC744;&#xAE4C;&#xC694;?</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define __COUNT_ARGS(_0, _1, _2, _3, _4, _5, _n, X...) _n
 #define COUNT_ARGS(X...) __COUNT_ARGS(, ##X, 5, 4, 3, 2, 1, 0) 
 #define CCC(...) __VA_ARGS__        
@@ -787,7 +787,7 @@ COUNT_ARGS( CCC(111,222,333) )
 1
 ----------------------------------
 
-$ gcpp &lt;&lt;\@
+$ gcpp
 #define __COUNT_ARGS(_0, _1, _2, _3, _4, _5, _n, X...) _n
 #define COUNT_ARGS(X...) #X                                   
 #define CCC(...) __VA_ARGS__
@@ -801,7 +801,7 @@ COUNT_ARGS( CCC(111,222,333) )
 &#xC0AC;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; <code>CCC(111,222,333)</code> &#xB9E4;&#xD06C;&#xB85C;&#xC758; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xAC00; &#xC0AC;&#xC6A9;&#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.
 &#xB9E4;&#xAC1C;&#xBCC0;&#xC218; <code>X</code> &#xC758; &#xAC12;&#xC774; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xC778; <code>111,222,333</code> &#xB85C; &#xCE58;&#xD658;&#xB418;&#xBA74;
  <code>_COUNT_ARGS(111,222,333)</code> &#xAC00; &#xB418;&#xACE0; main scan &#xC774; &#xBC1C;&#xC0DD;&#xD558;&#xBA74; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB85C; <code>3</code> &#xC774;&#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define __COUNT_ARGS(_0, _1, _2, _3, _4, _5, _n, X...) _n
 #define _COUNT_ARGS(X...) __COUNT_ARGS(, ##X, 5, 4, 3, 2, 1, 0)
 #define COUNT_ARGS(X) _COUNT_ARGS(X)
@@ -812,7 +812,7 @@ COUNT_ARGS( CCC(111,222,333) )
 
 3
 </code></pre><p>&#xB450; &#xBC88;&#xC9F8; &#xBC29;&#xBC95;&#xC740; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; <code>DEFER</code> &#xC640; <code>EVAL</code> &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xC785;&#xB2C8;&#xB2E4;.</p>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define NOP()
 #define EVAL(...) __VA_ARGS__
 #define DEFER(...) __VA_ARGS__ NOP()
@@ -829,7 +829,7 @@ EVAL( DEFER( COUNT_ARGS ) ( CCC(111,222,333) ) )
 <blockquote>
 <p>CAR &#xB294; &#xB9AC;&#xC2A4;&#xD2B8;&#xC5D0;&#xC11C; &#xCCAB; &#xBC88;&#xC9F8; &#xC6D0;&#xC18C;&#xB97C; &#xCD9C;&#xB825;&#xD558;&#xACE0;<br>CDR &#xC740; &#xB9AC;&#xC2A4;&#xD2B8;&#xC5D0;&#xC11C; &#xCCAB; &#xBC88;&#xC9F8; &#xC6D0;&#xC18C;&#xB97C; &#xC81C;&#xC678;&#xD55C; &#xB098;&#xBA38;&#xC9C0; &#xC6D0;&#xC18C;&#xB4E4;&#xC744; &#xCD9C;&#xB825;&#xD569;&#xB2C8;&#xB2E4;.<br>CONS &#xB294; &#xCCAB; &#xBC88;&#xC9F8; &#xC778;&#xC218;&#xB85C; &#xC8FC;&#xC5B4;&#xC9C4; &#xC6D0;&#xC18C;&#xB97C; &#xB450; &#xBC88;&#xC9F8; &#xC778;&#xC218;&#xB85C; &#xC8FC;&#xC5B4;&#xC9C4; &#xB9AC;&#xC2A4;&#xD2B8;&#xC5D0; &#xBCD1;&#xD569;&#xD569;&#xB2C8;&#xB2E4;.</p>
 </blockquote>
-<pre><code>$ gcpp &lt;&lt;\@
+<pre><code>$ gcpp
 #define EVAL(...) __VA_ARGS__
 #define JOIN(X, Y) X ## Y
 #define CAT(X, Y) JOIN(X, Y)               // JOIN &#xB300;&#xC2E0; CAT &#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xBA74; &#xC778;&#xC218; &#xD655;&#xC7A5;&#xC774; &#xB428;.
