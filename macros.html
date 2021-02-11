@@ -913,13 +913,13 @@ extern void qsort_r (void *__base, size_t __nmemb, size_t __size,
     . . .
     CHECK_BUF_SZ (sockfd);        <span class="hljs-comment">// &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC774;&#xC6A9;&#xD574; &#xD604;&#xC7AC; &#xC18C;&#xCF13; &#xBC84;&#xD37C; &#xC0C1;&#xD0DC;&#xB97C; &#xCD9C;&#xB825;</span>
 
-    ret = send (sockfd, buf, <span class="hljs-keyword">sizeof</span> (buf), MSG_DONTWAIT);
+    ret = send (sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
     <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;send... done : ret = %d\n&quot;</span>, ret);
 
     CHECK_BUF_SZ (sockfd);    
     sleep(<span class="hljs-number">5</span>);
 
-    ret = recv (sockfd, buf, <span class="hljs-keyword">sizeof</span> (buf), MSG_DONTWAIT);
+    ret = recv (sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
     <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;recv... done : ret = %d\n&quot;</span>, ret);
 
     CHECK_BUF_SZ (sockfd);    
@@ -948,7 +948,7 @@ buffer size : IN: <span class="hljs-number">202</span> / OUT: <span class="hljs-
     . . .
     CHECK_BUF_SZ (sockfd);
 
-    ret = send (sockfd, buf, <span class="hljs-keyword">sizeof</span> (buf), MSG_DONTWAIT);
+    ret = send (sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
     <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;send... done : ret = %d\n&quot;</span>, ret);
     . . .
 <span class="hljs-preprocessor">#########  output  #########</span>
