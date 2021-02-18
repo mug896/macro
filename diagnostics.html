@@ -949,6 +949,8 @@ $ header-macro errno.h | grep EWOULDBLOCK
 
 <span class="hljs-keyword">int</span> sockfd = socket( AF_INET, SOCK_STREAM, <span class="hljs-number">0</span> );
 <span class="hljs-keyword">int</span> sockfd = socket( AF_INET, SOCK_DGRAM, <span class="hljs-number">0</span> );
+
+<span class="hljs-keyword">int</span> sockfd = socket( AF_UNIX, SOCK_STREAM, <span class="hljs-number">0</span> );
 </code></pre>
 <p><code>AF_INET</code> &#xC758; <em>protocol</em> &#xAC12;&#xC73C;&#xB85C; &#xC0AC;&#xC6A9;&#xB418;&#xB294; <code>0</code> &#xC740; <code>IPPROTO_IP</code> &#xB97C; &#xB098;&#xD0C0;&#xB0C5;&#xB2C8;&#xB2E4;.
 &#xC5EC;&#xAE30;&#xC11C; <code>IPPROTO_IP</code> &#xB294; &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC544;&#xB2C8;&#xACE0; enum &#xC785;&#xB2C8;&#xB2E4;.
