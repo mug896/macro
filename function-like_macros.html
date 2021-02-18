@@ -611,7 +611,7 @@ foo 200 bar                              foo bar
 $ gcpp
 #define FOOBAR(a, b) foo a b bar
 
-FOOBAR()                // &#xC624;&#xB958;
+FOOBAR()                // 1 &#xAC1C;&#xC758; &#xC778;&#xC218;&#xB85C; &#xC778;&#xC2DD;&#xB3FC; &#xC624;&#xB958;
 FOOBAR(100, 200, 300)   // &#xC778;&#xC218; &#xAC1C;&#xC218;&#xAC00; &#xB9E4;&#xAC1C;&#xBCC0;&#xC218; &#xAC1C;&#xC218;&#xC640; &#xB9DE;&#xC9C0; &#xC54A;&#xC73C;&#xBA74; &#xC624;&#xB958;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.
 @
 &lt;stdin&gt;:3:5: error: macro &quot;FOOBAR&quot; requires 2 arguments, but only 1 given
