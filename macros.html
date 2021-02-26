@@ -688,9 +688,9 @@ do { if (x == 0) fprintf (stderr, &quot;Warning: &quot; &quot;x == 0&quot; &quot
         <span class="hljs-built_in">return</span> <span class="hljs-number">1</span>
     <span class="hljs-keyword">fi</span>
     file=<span class="hljs-variable">$1</span>
-    sed -E <span class="hljs-string">&apos;s/^\s*#\s*(include\s*&lt;[^&gt;]+&gt;)\s*$/\1;/&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span> | 
+    sed -E <span class="hljs-string">&apos;s/^\s*#\s*(include\s*&lt;[^&gt;]+&gt;)\s*$/\1;/; s/\//\a/g&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span> | 
         cpp -P | clang-format -style=<span class="hljs-string">&quot;{BasedOnStyle: Google, IndentWidth: 4}&quot;</span> |
-        sed -E <span class="hljs-string">&apos;s/^(include\s*&lt;[^&gt;]+&gt;);$/#\1/&apos;</span>
+        sed -E <span class="hljs-string">&apos;s/^(include\s*&lt;[^&gt;]+&gt;);$/#\1/; s/\a/\//g&apos;</span>
 }
 
 $ format-macro hello.c &gt; format_hello.c
