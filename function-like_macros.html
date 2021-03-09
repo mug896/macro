@@ -978,6 +978,22 @@ int main() {
 @
 
 3
+-------------------------------
+
+$ gcc -xc - &lt;&lt;\@ &amp;&amp; ./a.out
+#include &lt;stdio.h&gt;
+#define sum(a, b) (a + b + 100)
+int (sum)(int a, int b) {
+    return a + b + 200;
+}
+int main() {
+    printf(&quot;%d\n&quot;, sum(1, 2));        // &#xB9E4;&#xD06C;&#xB85C;
+    printf(&quot;%d\n&quot;, (sum)(1, 2));
+    return 0;
+}
+@
+103
+203
 </code></pre><h1 id="quiz">Quiz</h1>
 <p>&#xB2E4;&#xC74C;&#xC740; <code>pthread_cleanup_push()</code> &#xD568;&#xC218;&#xB97C; &#xC774;&#xC6A9;&#xD574; cleanup &#xD568;&#xC218;&#xB97C; &#xB4F1;&#xB85D;&#xD558;&#xACE0;
 <code>pthread_cancel()</code> &#xD568;&#xC218;&#xB97C; &#xC2E4;&#xD589;&#xD588;&#xC744; &#xB54C; &#xC815;&#xC0C1;&#xC801;&#xC73C;&#xB85C; cleanup &#xD568;&#xC218;&#xAC00; &#xD638;&#xCD9C;&#xB418;&#xB294;&#xC9C0; &#xC54C;&#xC544;&#xBCF4;&#xAE30; &#xC704;&#xD55C; &#xD14C;&#xC2A4;&#xD2B8;&#xC785;&#xB2C8;&#xB2E4;.
