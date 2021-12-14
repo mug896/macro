@@ -828,7 +828,7 @@ CHECK_EMPTY(foo)
 <span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> get_type_category(V) type_name&lt;decltype(V)&gt;()      <span class="hljs-comment">// value &#xAC12;&#xC744; &#xC804;&#xB2EC;</span></span>
 
 <span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print_type</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> msg, T&amp;&amp; arg)</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print_type</span><span class="hljs-params">(<span class="hljs-keyword">auto</span> msg, T&amp;&amp; arg)</span>
 </span>{
     <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; msg &lt;&lt; <span class="hljs-string">&quot; T   : &quot;</span> &lt;&lt; get_type_name(T) &lt;&lt; <span class="hljs-string">&apos;\n&apos;</span>;
     <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; msg &lt;&lt; <span class="hljs-string">&quot; arg : &quot;</span> &lt;&lt; get_type_category(arg) &lt;&lt; <span class="hljs-string">&apos;\n&apos;</span>;
