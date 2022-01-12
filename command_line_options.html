@@ -754,7 +754,7 @@ $ make arch/x86/kernel/vmlinux.lds
 <p>&#xB2E4;&#xC74C;&#xC740; <code>*.c</code> &#xD30C;&#xC77C;&#xC758; &#xC804;&#xCC98;&#xB9AC; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xB294; &#xC2A4;&#xD06C;&#xB9BD;&#xD2B8;&#xC785;&#xB2C8;&#xB2E4;.
 &#xACB0;&#xACFC;&#xB97C; clang-format &#xD574;&#xC11C; &#xCD9C;&#xB825;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xC5D0; &#xB530;&#xB77C; &#xC2DC;&#xAC04;&#xC774; &#xC624;&#xB798; &#xAC78;&#xB9B4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
 <pre><code class="lang-bash">$ <span class="hljs-built_in">cd</span> linux-source                 <span class="hljs-comment"># &#xC0AC;&#xC6A9; &#xBC29;&#xBC95;</span>
-$ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&#xC77C; &#xBD80;&#xBD84;&#xB9CC; &#xCD9C;&#xB825;&#xB429;&#xB2C8;&#xB2E4;. &#xB9CC;&#xC57D;&#xC5D0; &#xD5E4;&#xB354;&#xC5D0; &#xD3EC;&#xD568;&#xB41C; static</span>
+$ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&#xC77C; &#xBD80;&#xBD84;&#xB9CC; &#xCD9C;&#xB825;&#xB429;&#xB2C8;&#xB2E4;. &#xB9CC;&#xC57D;&#xC5D0; &#xD5E4;&#xB354;&#xC5D0; &#xD3EC;&#xD568;&#xB41C; inline</span>
 . . .                             <span class="hljs-comment"># &#xD568;&#xC218; &#xB0B4;&#xC6A9;&#xC744; &#xBCF4;&#xACE0; &#xC2F6;&#xC73C;&#xBA74; block/ioctl.i &#xD30C;&#xC77C;&#xC744; &#xBCF4;&#xBA74;&#xB429;&#xB2C8;&#xB2E4;.</span>
 </code></pre>
 <pre><code class="lang-bash"><span class="hljs-keyword">function</span> header-make ()
@@ -798,6 +798,7 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
 </code></pre>
 <pre><code class="lang-bash"><span class="hljs-comment"># &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; header-* &#xD568;&#xC218;&#xB97C; &#xC774;&#xC6A9;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
 <span class="hljs-comment"># &#xC774;&#xB54C;&#xB294; sed &#xB97C; &#xC774;&#xC6A9;&#xD574; #include &quot;ext4.h&quot; --&gt; #include &quot;fs/ext4/ext4.h&quot; &#xB85C; &#xBCC0;&#xACBD;&#xD574; &#xC90D;&#xB2C8;&#xB2E4;.</span>
+<span class="hljs-comment"># header-dumpk &#xB294; clang-format &#xD558;&#xC9C0;&#xC54A;&#xACE0; &#xCD9C;&#xB825;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xBE60;&#xB974;&#xAC8C; &#xACB0;&#xACFC;&#xB97C; &#xBCFC;&#xC218;&#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
 $ cat fs/ext4/file.c | sed -E <span class="hljs-string">&apos;s:^(#include &quot;):\1fs/ext4/:&apos;</span> | header-dumpk
 </code></pre>
 
