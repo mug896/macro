@@ -809,7 +809,7 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
     <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span> &amp;&amp; search=<span class="hljs-string">&apos;\w*&apos;</span><span class="hljs-variable">$search</span><span class="hljs-string">&apos;\w*&apos;</span> || search=<span class="hljs-string">&apos;\w+&apos;</span>
 
     cpp -P <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> &lt;&lt;&lt; <span class="hljs-variable">$hsum</span> | _header-format |
-        sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^(__extension__ )?(extern )?(typedef|struct|union|enum|extern) [^()]*[;{]$/ {&apos;</span> \
+        sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^(__extension__ |extern )?(typedef|struct|union|enum|extern) [^()]*[;{]$/ {&apos;</span> \
             <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/;$/d&apos;</span> <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/\{$/{ :X n; /^}/b; bX&apos;</span> <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;}}&apos;</span> \
             <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^\{$/{ :Y n; /^};?$/{ s//;/p; b}; bY }&apos;</span> <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;p&apos;</span> |
         sed -zE <span class="hljs-string">&apos;s/(\s*;)+/;\n/g&apos;</span> |
