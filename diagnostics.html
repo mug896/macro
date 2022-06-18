@@ -815,11 +815,11 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
         sed -zE <span class="hljs-string">&apos;s/(\s*;)+/;\n/g&apos;</span> |
         sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^$/!H; /;$/ { g; s/\bsizeof\(//g; &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$attr</span>&quot;</span> \
             <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$all</span>&quot;</span><span class="hljs-string">&apos;\w+\(\s*\w/!bX; /__typeof__\(/bX;&apos;</span> \
-            <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;\(/{ /\btypedef /!{ g; p }}; :X z; h&apos;</span> \
+            <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;\(/I{ /\btypedef /!{ g; p }}; :X z; h&apos;</span> \
             <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;}&apos;</span> | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$clang_format</span>&quot;</span>
     <span class="hljs-built_in">echo</span>
     cpp <span class="hljs-operator">-d</span>D <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> &lt;&lt;&lt; <span class="hljs-variable">$hsum</span> | 
-        sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&quot;<span class="hljs-variable">$allm</span>&quot;</span><span class="hljs-string">&apos; /^#define &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;\(/{ s/$/\n/p }&apos;</span> | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$clang_format</span>&quot;</span>
+        sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&quot;<span class="hljs-variable">$allm</span>&quot;</span><span class="hljs-string">&apos; /^#define &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;\(/I{ s/$/\n/p }&apos;</span> | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$clang_format</span>&quot;</span>
 }
 
 <span class="hljs-keyword">function</span> header-<span class="hljs-function"><span class="hljs-title">macro</span></span> () 
@@ -836,7 +836,7 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
         <span class="hljs-keyword">else</span>
             <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span> &amp;&amp; search=<span class="hljs-string">&apos;\w*&apos;</span><span class="hljs-variable">$search</span><span class="hljs-string">&apos;\w*&apos;</span> || search=<span class="hljs-string">&apos;\w+&apos;</span>
             cpp <span class="hljs-operator">-d</span>D <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> &lt;&lt;&lt; <span class="hljs-variable">$hsum</span> |
-                sed -En <span class="hljs-string">&quot;<span class="hljs-variable">$all</span>&quot;</span><span class="hljs-string">&apos; /^#define &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;/p&apos;</span> | sort
+                sed -En <span class="hljs-string">&quot;<span class="hljs-variable">$all</span>&quot;</span><span class="hljs-string">&apos; /^#define &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;/Ip&apos;</span> | sort
         <span class="hljs-keyword">fi</span>
     <span class="hljs-keyword">else</span>
         cpp <span class="hljs-operator">-d</span>M <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> /dev/null | sort
@@ -849,7 +849,7 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
     _header-args <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> || <span class="hljs-built_in">return</span>
     <span class="hljs-built_in">eval</span> <span class="hljs-built_in">set</span> -- <span class="hljs-variable">$opts</span>
 
-    <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span> &amp;&amp; search=<span class="hljs-string">&apos;/&apos;</span><span class="hljs-variable">$search</span><span class="hljs-string">&apos;/!b;&apos;</span>
+    <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span> &amp;&amp; search=<span class="hljs-string">&apos;/&apos;</span><span class="hljs-variable">$search</span><span class="hljs-string">&apos;/I!b;&apos;</span>
     cpp -P <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> &lt;&lt;&lt; <span class="hljs-variable">$hsum</span> | _header-format |
         sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^(typedef )?enum .*\{/ { h &apos;</span> \
                 <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/;$/ bZ&apos;</span> <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;:X n; H; /^}/{ g; bZ }; bX&apos;</span> \
@@ -873,8 +873,8 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
                 <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/\{$/ { h; :X n; H; /^}/{ g; bZ1 }; bX }&apos;</span> \
                 <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/;$/ { h; /__attribute__/bZ1; /\(/bZ2; bZ1 }&apos;</span> \
                 <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;h; :Y n; H; /;$/{ g; /__attribute__/bZ1; bZ2 }; bY&apos;</span> \
-                <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;:Z1 s/\s*__attribute__.*\)\)//; &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$all1</span>&quot;</span><span class="hljs-string">&apos; /&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;;$/{ g; s/$/\n/p }; b&apos;</span> \
-                <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;:Z2 &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$all2</span>&quot;</span><span class="hljs-string">&apos; /&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;\)?\(/{ s/$/\n/p }; b&apos;</span> \
+                <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;:Z1 s/\s*__attribute__.*\)\)//; &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$all1</span>&quot;</span><span class="hljs-string">&apos; /&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;;$/I{ g; s/$/\n/p }; b&apos;</span> \
+                <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;:Z2 &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$all2</span>&quot;</span><span class="hljs-string">&apos; /&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;\)?\(/I{ s/$/\n/p }; b&apos;</span> \
                 <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;}&apos;</span>
 }
 
@@ -889,7 +889,7 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
     cpp -P <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> &lt;&lt;&lt; <span class="hljs-variable">$hsum</span> | _header-format |
         sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^(typedef )?(struct|union) .*\{/ {&apos;</span> \
                 <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/;$/ bY&apos;</span> <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;h; :X n; H; /^}/{ g; bY }; bX;&apos;</span> \
-                <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;:Y &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$all</span>&quot;</span><span class="hljs-string">&apos; /^(typedef )?(struct|union) &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos; \{/{ s/$/\n/p }&apos;</span> \
+                <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;:Y &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$all</span>&quot;</span><span class="hljs-string">&apos; /^(typedef )?(struct|union) &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos; \{/I{ s/$/\n/p }&apos;</span> \
                 <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;}&apos;</span>
 }
 
