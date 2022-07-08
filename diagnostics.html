@@ -951,15 +951,6 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
 }
 </span></code></pre>
 <h1 id="3-">3 .</h1>
-<p><code>ptrdiff_t</code> &#xB098; <code>size_t</code> &#xAC19;&#xC740; &#xD0C0;&#xC785;&#xC774; &#xC5B4;&#xB290; &#xD5E4;&#xB354; &#xD30C;&#xC77C;&#xC5D0; &#xC788;&#xB294;&#xC9C0;&#xB294; &#xC5B4;&#xB5BB;&#xAC8C; &#xC54C; &#xC218; &#xC788;&#xC744;&#xAE4C;&#xC694;?</p>
-<pre><code class="lang-bash">$ grep -Irw <span class="hljs-string">&apos;ptrdiff_t\s*;&apos;</span> /usr/{include,lib}
-. . .
-$ grep -Irw <span class="hljs-string">&apos;size_t\s*;&apos;</span> /usr/{include,lib}
-. . .
-$ rg -w <span class="hljs-string">&apos;define\s+TCP_NODELAY&apos;</span> /usr/{include,lib}      <span class="hljs-comment"># &#xB9E4;&#xD06C;&#xB85C;</span>
-. . .
-</code></pre>
-<h1 id="4-">4 .</h1>
 <p>&#xC624;&#xB958;&#xCF54;&#xB4DC; &#xC911;&#xC5D0; &#xD558;&#xB098;&#xC778; <code>EWOULDBLOCK</code> &#xACFC; <code>EAGAIN</code> &#xC740; &#xC5B4;&#xB5A4; &#xCC28;&#xC774;&#xAC00; &#xC788;&#xC744;&#xAE4C;&#xC694;?</p>
 <p><code>EWOULDBLOCK</code> &#xC758; &#xC758;&#xBBF8;&#xB294; &quot;operation would block&quot; &#xC744; &#xB098;&#xD0C0;&#xB0B4;&#xACE0;
 <code>EAGAIN</code> &#xB294; &quot;temporary resource shortage made an operation impossible&quot; &#xC744; &#xB098;&#xD0C0;&#xB0C8;&#xB294;&#xB370;
@@ -984,7 +975,7 @@ $ header-macro errno.h -s EWOULDBLOCK
 
   <span class="hljs-keyword">if</span> ( errno == EWOULDBLOCK || errno == EAGAIN ) { ...
 </code></pre>
-<h1 id="5-">5 .</h1>
+<h1 id="4-">4 .</h1>
 <p><code>socket</code> &#xD568;&#xC218;&#xC758; &#xC6D0;&#xD615;&#xC740; &#xC544;&#xB798;&#xC640; &#xAC19;&#xC740;&#xB370;&#xC694;. 
 &#xC5EC;&#xAE30;&#xC11C; &#xC138; &#xBC88;&#xC9F8; &#xC778;&#xC218;&#xC778; <em>protocol</em> &#xAC12;&#xC73C;&#xB85C; <code>0</code> &#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xACBD;&#xC6B0;&#xAC00; &#xB9CE;&#xC2B5;&#xB2C8;&#xB2E4;.
 &#xC5EC;&#xAE30;&#xC11C; <code>0</code> &#xC740; &#xC5B4;&#xB5A4; &#xAC12;&#xC77C;&#xAE4C;&#xC694; ?</p>
