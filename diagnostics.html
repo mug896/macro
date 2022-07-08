@@ -1004,13 +1004,18 @@ $ header-macro errno.h | grep EWOULDBLOCK
 <code>AF_UNIX</code> ( unix domain socket ) &#xAC19;&#xC740; &#xACBD;&#xC6B0;&#xB294; local &#xC811;&#xC18D;&#xC5D0; &#xC0AC;&#xC6A9;&#xB418;&#xB294; &#xAC83;&#xC73C;&#xB85C;
 &#xB530;&#xB85C; protocol &#xC774; &#xC0AC;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xC73C;&#xBBC0;&#xB85C; <code>0</code> &#xC744; &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.
 &#xADF8; &#xC678;&#xC5D0;&#xB294; &#xC544;&#xB798; &#xC138; &#xBC88;&#xC9F8;&#xC640; &#xAC19;&#xC774; &#xC9C1;&#xC811; <em>protocol</em> &#xAC12;&#xC744; &#xC801;&#xC5B4;&#xC8FC;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-bash">$ header-enum netinet/in.h | grep -w IPPROTO_IP     <span class="hljs-comment"># &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC544;&#xB2C8;&#xACE0; enum &#xAC12;&#xC774;&#xB2E4;.</span>
+<pre><code class="lang-bash">$ header-enum netinet/in.h <span class="hljs-operator">-s</span> IPPROTO_IP       <span class="hljs-comment"># &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC544;&#xB2C8;&#xACE0; enum &#xAC12;&#xC774;&#xB2E4;.</span>
+enum {
     IPPROTO_IP = <span class="hljs-number">0</span>,
-
-$ header-macro netinet/in.h | grep -w IPPROTO_IP
+    IPPROTO_ICMP = <span class="hljs-number">1</span>,
+    . . .
+$ header-macro netinet/in.h <span class="hljs-operator">-s</span> IPPROTO_IP
 <span class="hljs-comment">#define IPPROTO_IP IPPROTO_IP</span>
+<span class="hljs-comment">#define IPPROTO_IPIP IPPROTO_IPIP</span>
+<span class="hljs-comment">#define IPPROTO_IPV6 IPPROTO_IPV6</span>
 
-int sockfd = socket( AF_INET, SOCK_STREAM, IPPROTO_SCTP)  <span class="hljs-comment"># &#xC9C1;&#xC811; protocol &#xAC12;&#xC744; &#xC801;&#xC5B4;&#xC8FC;&#xC5B4;&#xC57C; &#xD55C;&#xB2E4;.</span>
+<span class="hljs-comment"># &#xC9C1;&#xC811; protocol &#xAC12;&#xC744; &#xC801;&#xC5B4;&#xC8FC;&#xC5B4;&#xC57C; &#xD55C;&#xB2E4;.</span>
+int sockfd = socket( AF_INET, SOCK_STREAM, IPPROTO_SCTP)
 </code></pre>
 
                     
