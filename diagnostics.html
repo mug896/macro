@@ -696,7 +696,7 @@ bash$ cpp <span class="hljs-operator">-d</span>M /dev/null | grep <span class="h
 <p>&#xB2E4;&#xC74C;&#xC740; shell &#xD568;&#xC218;&#xB97C; &#xD65C;&#xC6A9;&#xD558;&#xC5EC; &#xD2B9;&#xC815; &#xD5E4;&#xB354;&#xB97C; #include &#xD588;&#xC744; &#xB54C; &#xC815;&#xC758;&#xB418;&#xC5B4; &#xC788;&#xB294;
 &#xD568;&#xC218;, &#xB9E4;&#xD06C;&#xB85C;, typedef, struct, enum &#xC744; &#xCD9C;&#xB825;&#xD558;&#xB294; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.
 &#xD5E4;&#xB354;&#xAC00; &#xD3EC;&#xD568;&#xB41C; &#xC18C;&#xC2A4;&#xCF54;&#xB4DC;&#xB97C; &#xBD99;&#xC5EC;&#xB123;&#xAE30; &#xD558;&#xC5EC; &#xD655;&#xC7A5;&#xB41C; &#xACB0;&#xACFC;&#xB97C; &#xCD9C;&#xB825;&#xD574; &#xBCFC; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-bash"><span class="hljs-comment"># stdio.h, math.h &#xD5E4;&#xB354;&#xB97C; #include &#xD588;&#xC744; &#xB54C; &#xC815;&#xC758;&#xB418;&#xC5B4; &#xC788;&#xB294; &#xD568;&#xC218;&#xB97C; &#xCD9C;&#xB825; ( &#xD568;&#xC218;&#xD615; &#xB9E4;&#xD06C;&#xB85C; &#xD3EC;&#xD568; )</span>
+<pre><code class="lang-bash"><span class="hljs-comment"># stdio.h, math.h &#xD5E4;&#xB354;&#xB97C; #include &#xD588;&#xC744; &#xB54C; &#xC815;&#xC758;&#xB418;&#xC5B4; &#xC788;&#xB294; &#xD568;&#xC218;&#xB97C; &#xCD9C;&#xB825; (&#xD568;&#xC218;&#xD615; &#xB9E4;&#xD06C;&#xB85C; &#xD3EC;&#xD568;)</span>
 <span class="hljs-comment"># &#xAE30;&#xBCF8;&#xC801;&#xC73C;&#xB85C; &#xC774;&#xB984; &#xC55E;&#xC5D0; &quot;_&quot; &#xAC00; &#xBD99;&#xB294; &#xAC83;&#xC740; &#xC81C;&#xC678;&#xD558;&#xB294;&#xB370; &#xD3EC;&#xD568;&#xC2DC;&#xD0A4;&#xB824;&#xBA74; &quot;-a&quot; &#xC635;&#xC158;&#xC744; &#xCD94;&#xAC00; &#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</span>
 $ header-function stdio.h math.h
 
@@ -749,7 +749,7 @@ int <span class="hljs-function"><span class="hljs-title">main</span></span>() {
 <span class="hljs-comment"># &#xC544;&#xBB34;&#xB7F0; &#xD5E4;&#xB354;&#xB97C; &#xC8FC;&#xC9C0; &#xC54A;&#xC73C;&#xBA74; predefined macros &#xAC00; &#xCD9C;&#xB825;&#xB429;&#xB2C8;&#xB2E4;.</span>
 $ header-macro
 
-<span class="hljs-comment"># signal.h &#xD5E4;&#xB354;&#xB97C; #include &#xD588;&#xC744; &#xB54C; sigevent_t &#xD0C0;&#xC785; &#xC815;&#xC758;&#xB97C; &#xAC80;&#xC0C9;</span>
+<span class="hljs-comment"># signal.h &#xD5E4;&#xB354;&#xB97C; #include &#xD588;&#xC744; &#xB54C; sigevent_t &#xD0C0;&#xC785; &#xC815;&#xC758;&#xB97C; &#xAC80;&#xC0C9; (-s &#xC635;&#xC158;)</span>
 $ header-typedef signal.h <span class="hljs-operator">-s</span> sigevent
 
 $ header-typedef &lt;&lt;\@ <span class="hljs-operator">-s</span> sigevent
@@ -767,8 +767,8 @@ $ header-dump <span class="hljs-operator">-l</span> stdio.h
 <span class="hljs-comment"># &#xAE30;&#xD0C0; cpp &#xC635;&#xC158;&#xC744; &#xCD94;&#xAC00;&#xD558;&#xB824;&#xBA74; &#xB9C8;&#xC9C0;&#xB9C9;&#xC5D0; &apos;--&apos; &#xBD99;&#xC774;&#xACE0; &#xCD94;&#xAC00;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</span>
 $ header-dump stdlib.h -- -D_GNU_SOURCE
 </code></pre>
-<pre><code class="lang-bash"><span class="hljs-comment"># &#xD568;&#xC218; &#xC0AC;&#xC6A9;&#xC744; &#xC704;&#xD574;&#xC120; clang-format &#xBA85;&#xB839;&#xC774; &#xC788;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</span>
-<span class="hljs-keyword">function</span> header-<span class="hljs-function"><span class="hljs-title">dump</span></span> ()
+<p>&#xD568;&#xC218; &#xC0AC;&#xC6A9;&#xC744; &#xC704;&#xD574;&#xC120; clang-format &#xBA85;&#xB839;&#xC774; &#xC788;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-bash"><span class="hljs-keyword">function</span> header-<span class="hljs-function"><span class="hljs-title">dump</span></span> ()
 {
     <span class="hljs-built_in">local</span> hsum opts hlist=<span class="hljs-literal">false</span> clang_format
     _header-args <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> || <span class="hljs-built_in">return</span>
