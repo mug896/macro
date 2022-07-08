@@ -964,13 +964,13 @@ $ rg -w <span class="hljs-string">&apos;define\s+TCP_NODELAY&apos;</span> /usr/{
 <p><code>EWOULDBLOCK</code> &#xC758; &#xC758;&#xBBF8;&#xB294; &quot;operation would block&quot; &#xC744; &#xB098;&#xD0C0;&#xB0B4;&#xACE0;
 <code>EAGAIN</code> &#xB294; &quot;temporary resource shortage made an operation impossible&quot; &#xC744; &#xB098;&#xD0C0;&#xB0C8;&#xB294;&#xB370;
 &#xD604;&#xC7AC;&#xB294; &#xB450; &#xB9E4;&#xD06C;&#xB85C; &#xAC12;&#xC744; &#xAD6C;&#xBD84; &#xC5C6;&#xC774; &#xAC19;&#xC740; &#xAC12;&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-c">$ header-macro errno.h -s EWOULDBLOCK       <span class="hljs-comment">// Resource temporarily unavailable</span>
+<pre><code class="lang-c">$ header-macro errno.h -e EWOULDBLOCK       <span class="hljs-comment">// Resource temporarily unavailable</span>
 <span class="hljs-number">11</span>
 
-$ header-macro errno.h -s EAGAIN            <span class="hljs-comment">// Resource temporarily unavailable</span>
+$ header-macro errno.h -e EAGAIN            <span class="hljs-comment">// Resource temporarily unavailable</span>
 <span class="hljs-number">11</span>
 
-$ header-macro errno.h | grep EWOULDBLOCK
+$ header-macro errno.h -s EWOULDBLOCK
 <span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> EWOULDBLOCK EAGAIN</span>
 </code></pre>
 <p>&#xD558;&#xC9C0;&#xB9CC; 2002 &#xB144; &#xC774;&#xC804;&#xC758; AIX 4.3,5.1  HP-UX 11.22  OSF1 &#xAC19;&#xC740; &#xC6B4;&#xC601;&#xCCB4;&#xC81C;&#xC5D0;&#xC11C;&#xB294; 
