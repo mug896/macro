@@ -719,23 +719,6 @@ $ header-functionk &lt;&lt;\@
 . . .
 $ header-functionk <span class="hljs-string">&apos;#include &quot;fs/ext4/ext4.h&quot;&apos;</span>
 . . .
------------------------------------------------------
-
-<span class="hljs-comment"># &#xB2E4;&#xC74C;&#xC740; &#xD65C;&#xC6A9;&#xD558;&#xC5EC; task_struct &#xAD6C;&#xC870;&#xCCB4;&#xB97C; &#xCC3E;&#xB294; &#xC608;&#xC785;&#xB2C8;&#xB2E4;.</span>
-
-$ rg <span class="hljs-string">&apos;struct task_struct \{&apos;</span> <span class="hljs-operator">-l</span> 
-kernel/kheaders_data.tar.xz.tmp/include/linux/sched.h
-include/linux/sched.h             &lt;------ sched.h
-tools/include/linux/lockdep.h
-tools/testing/selftests/bpf/progs/<span class="hljs-built_in">test</span>_core_reloc_kernel.c
-tools/testing/selftests/bpf/progs/<span class="hljs-built_in">test</span>_core_retro.c
-tools/testing/selftests/bpf/progs/strobemeta.h
-
-$ header-structk linux/sched.h <span class="hljs-operator">-s</span> task_struct
-struct task_struct {
-        struct thread_info thread_info;
-        volatile long state;
-. . .
 </code></pre>
 <p>&#xD30C;&#xC77C; &#xB2E8;&#xC704;&#xB85C; &#xC804;&#xCC98;&#xB9AC; &#xC644;&#xB8CC;&#xB41C; &#xACB0;&#xACFC;&#xB97C; &#xBCF4;&#xB824;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</p>
 <pre><code class="lang-bash">$ <span class="hljs-built_in">cd</span> linux-source
