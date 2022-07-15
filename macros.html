@@ -925,26 +925,26 @@ extern void qsort_r (void *__base, size_t __nmemb, size_t __size,
 &#xD14C;&#xC2A4;&#xD2B8;&#xB97C; &#xB05D;&#xB0B4;&#xACE0; &#xB9E4;&#xD06C;&#xB85C; &#xCD9C;&#xB825;&#xC744; &#xC81C;&#xAC70;&#xD558;&#xB824;&#xBA74; &#xC5B4;&#xB5BB;&#xAC8C;&#xD560;&#xAE4C;&#xC694;?</p>
 <pre><code class="lang-c"><span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> CHECK_BUF_SZ( $fd ) do { \
         size_t size = <span class="hljs-number">0</span>; \
-        printf (<span class="hljs-string">&quot;buffer size : &quot;</span>); \
-        ioctl ($fd, FIONREAD, &amp;size); \
-        printf (<span class="hljs-string">&quot;IN: %lu&quot;</span>, size); \
-        ioctl ($fd, TIOCOUTQ, &amp;size); \
-        printf (<span class="hljs-string">&quot; / OUT: %lu\n&quot;</span>, size); \
+        printf(<span class="hljs-string">&quot;buffer size : &quot;</span>); \
+        ioctl($fd, FIONREAD, &amp;size); \
+        printf(<span class="hljs-string">&quot;IN: %lu&quot;</span>, size); \
+        ioctl($fd, TIOCOUTQ, &amp;size); \
+        printf(<span class="hljs-string">&quot; / OUT: %lu\n&quot;</span>, size); \
 } while (<span class="hljs-number">0</span>)</span>
 
     . . .
-    CHECK_BUF_SZ (sockfd);        <span class="hljs-comment">// &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC774;&#xC6A9;&#xD574; &#xD604;&#xC7AC; &#xC18C;&#xCF13; &#xBC84;&#xD37C; &#xC0C1;&#xD0DC;&#xB97C; &#xCD9C;&#xB825;</span>
+    CHECK_BUF_SZ(sockfd);        <span class="hljs-comment">// &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC774;&#xC6A9;&#xD574; &#xD604;&#xC7AC; &#xC18C;&#xCF13; &#xBC84;&#xD37C; &#xC0C1;&#xD0DC;&#xB97C; &#xCD9C;&#xB825;</span>
 
-    ret = send (sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
-    <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;send... done : ret = %d\n&quot;</span>, ret);
+    ret = send(sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;send... done : ret = %d\n&quot;</span>, ret);
 
-    CHECK_BUF_SZ (sockfd);    
+    CHECK_BUF_SZ(sockfd);    
     sleep(<span class="hljs-number">5</span>);
 
-    ret = recv (sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
-    <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;recv... done : ret = %d\n&quot;</span>, ret);
+    ret = recv(sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;recv... done : ret = %d\n&quot;</span>, ret);
 
-    CHECK_BUF_SZ (sockfd);    
+    CHECK_BUF_SZ(sockfd);    
     . . .
 
 <span class="hljs-preprocessor">#########  output  #########</span>
@@ -958,20 +958,20 @@ buffer size : IN: <span class="hljs-number">202</span> / OUT: <span class="hljs-
 <p>&#xB2E4;&#xC74C;&#xACFC;&#xAC19;&#xC774; <code>CHECK_BUF_SZ</code> &#xB9E4;&#xD06C;&#xB85C;&#xB97C; <code>#undef</code> &#xD55C;&#xD6C4;&#xC5D0; body &#xAC00; empty &#xC778; &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xB2E4;&#xC2DC; &#xC815;&#xC758;&#xD574;&#xC8FC;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</p>
 <pre><code class="lang-c"><span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> CHECK_BUF_SZ( $fd ) do { \
         size_t size = <span class="hljs-number">0</span>; \
-        printf (<span class="hljs-string">&quot;buffer size : &quot;</span>); \
-        ioctl ($fd, FIONREAD, &amp;size); \
-        printf (<span class="hljs-string">&quot;IN: %lu&quot;</span>, size); \
-        ioctl ($fd, TIOCOUTQ, &amp;size); \
-        printf (<span class="hljs-string">&quot; / OUT: %lu\n&quot;</span>, size); \
+        printf(<span class="hljs-string">&quot;buffer size : &quot;</span>); \
+        ioctl($fd, FIONREAD, &amp;size); \
+        printf(<span class="hljs-string">&quot;IN: %lu&quot;</span>, size); \
+        ioctl($fd, TIOCOUTQ, &amp;size); \
+        printf(<span class="hljs-string">&quot; / OUT: %lu\n&quot;</span>, size); \
 } while (<span class="hljs-number">0</span>)</span>
 
 <span class="hljs-preprocessor">#<span class="hljs-keyword">undef</span>  CHECK_BUF_SZ                 <span class="hljs-comment">// &#xBA3C;&#xC800; CHECK_BUF_SZ &#xB9E4;&#xD06C;&#xB85C;&#xB97C; #undef &#xD558;&#xACE0;</span></span>
 <span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> CHECK_BUF_SZ(fd)             <span class="hljs-comment">// body &#xAC00; empty &#xC778; &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xB2E4;&#xC2DC; &#xC815;&#xC758;</span></span>
     . . .
-    CHECK_BUF_SZ (sockfd);
+    CHECK_BUF_SZ(sockfd);
 
-    ret = send (sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
-    <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;send... done : ret = %d\n&quot;</span>, ret);
+    ret = send(sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;send... done : ret = %d\n&quot;</span>, ret);
     . . .
 <span class="hljs-preprocessor">#########  output  #########</span>
 
