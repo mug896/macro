@@ -938,13 +938,13 @@ extern void qsort_r (void *__base, size_t __nmemb, size_t __size,
     ret = send(sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;send... done : ret = %d\n&quot;</span>, ret);
 
-    CHECK_BUF_SZ(sockfd);    
+    CHECK_BUF_SZ(sockfd);
     sleep(<span class="hljs-number">5</span>);
 
     ret = recv(sockfd, buf, <span class="hljs-keyword">sizeof</span> buf, MSG_DONTWAIT);
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;recv... done : ret = %d\n&quot;</span>, ret);
 
-    CHECK_BUF_SZ(sockfd);    
+    CHECK_BUF_SZ(sockfd);
     . . .
 
 <span class="hljs-preprocessor">#########  output  #########</span>
