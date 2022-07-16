@@ -785,7 +785,7 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
 
 <span class="hljs-keyword">function</span> _header-<span class="hljs-function"><span class="hljs-title">format</span></span> ()
 {
-    sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/\a/b&apos;</span> <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^#pragma/d&apos;</span> \
+    sed -En <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/\a|^#pragma/d&apos;</span> \
         <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;/^\{$/{ h; :X n; H; /^}/{ g; /}$/{ s/.*/;/p; b}; p; b}; bX}&apos;</span> \
         <span class="hljs-operator">-e</span> <span class="hljs-string">&apos;p&apos;</span> | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$clang_format</span>&quot;</span>
 }
