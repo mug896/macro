@@ -902,7 +902,7 @@ extern void qsort_r (void *__base, size_t __nmemb, size_t __size,
 $ cpp -M &lt;&lt;&lt; <span class="hljs-string">&quot;#include &lt;stdlib.h&gt;&quot;</span> 
 -: /usr/include/stdc-predef.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h
+ /usr/include/features.h   &lt;-----
 . . .
 
 $ grep -P -C1 <span class="hljs-string">&apos;define[ \t]+__USE_GNU&apos;</span> /usr/include/features.h 
