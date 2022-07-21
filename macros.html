@@ -813,12 +813,12 @@ enum { FOO, BAR }                               enum { FOO, BAR }
 #define FOO                                     #define FOO FOO
 
 #ifdef FOO                                      #ifdef FOO
-FOO + 1                                         FOO + 1
+val += FOO                                      val += FOO
 #endif                                          #endif
 @                                               @
 
 enum { FOO, BAR }   &#xC804;&#xCC98;&#xB9AC;&#xAE30;&#xC5D0; &#xC758;&#xD574;                 enum { FOO, BAR }
- + 1         &lt;----  enum &#xC774;&#xB984;&#xC774; &#xC0AD;&#xC81C;&#xB41C;&#xB2E4;.           FOO + 1
+val +=       &lt;----  enum &#xC774;&#xB984;&#xC774; &#xC0AD;&#xC81C;&#xB41C;&#xB2E4;.           val += FOO
 </code></pre><pre><code>// /usr/include/x86_64-linux-gnu/bits/socket_type.h &#xCC38;&#xC870;
 
 enum __socket_type
