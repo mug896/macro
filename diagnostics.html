@@ -712,6 +712,10 @@ $ header-macro sys/select.h <span class="hljs-operator">-e</span> <span class="h
 ((void) (((&amp;bar)-&gt;__fds_bits)[((foo) / (<span class="hljs-number">8</span> * (int) sizeof (__fd_mask)))] 
 |= ((__fd_mask) (<span class="hljs-number">1</span>UL &lt;&lt; ((foo) % (<span class="hljs-number">8</span> * (int) sizeof (__fd_mask)))))))
 
+<span class="hljs-comment"># &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xD558;&#xBA74; server.c &#xC18C;&#xC2A4;&#xD30C;&#xC77C; &#xC804;&#xCCB4;&#xC758; &#xB9E4;&#xD06C;&#xB85C; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
+$ header-macro &lt; server.c
+$ cat server.c | header-macro
+
 <span class="hljs-comment"># &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; heredoc &#xC744; &#xC774;&#xC6A9;&#xD574; &#xCF54;&#xB4DC;&#xB97C; &#xBD99;&#xC5EC;&#xB123;&#xAE30; &#xD558;&#xC5EC; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
 $ header-macro &lt;&lt;\@  
 <span class="hljs-comment">#include &lt;stdio.h&gt; </span>
