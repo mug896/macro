@@ -736,20 +736,6 @@ int <span class="hljs-function"><span class="hljs-title">main</span></span>() {
 }
 @
 
-int <span class="hljs-function"><span class="hljs-title">main</span></span>() {
-    char buf[<span class="hljs-number">20</span>];
-    FILE *file = fopen(<span class="hljs-string">&quot;tmp.txt&quot;</span>, <span class="hljs-string">&quot;r+&quot;</span>);
-    flock( fileno(file), <span class="hljs-number">2</span>);                     // LOCK_EX &#xB294; <span class="hljs-number">2</span> &#xB85C; &#xD655;&#xC7A5; 
-    <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100000</span>; i++) {
-        fseek( file, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);                      // SEEK_SET &#xC740; <span class="hljs-number">0</span> &#xC73C;&#xB85C; &#xD655;&#xC7A5; 
-        fgets( buf, sizeof buf, file);
-        long int num = strtol( buf, ((void *)<span class="hljs-number">0</span>), <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>;
-        fseek( file, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
-        fprintf( file, <span class="hljs-string">&quot;%ld\n&quot;</span>, num);
-    }
-    flock( fileno(file), <span class="hljs-number">8</span>);                     // LOCK_UN &#xB294; <span class="hljs-number">8</span> &#xB85C; &#xD655;&#xC7A5;
-}
-
 <span class="hljs-comment"># &#xC544;&#xBB34;&#xB7F0; &#xD5E4;&#xB354;&#xB97C; &#xC8FC;&#xC9C0; &#xC54A;&#xC73C;&#xBA74; predefined macros &#xAC00; &#xCD9C;&#xB825;&#xB429;&#xB2C8;&#xB2E4;.</span>
 $ header-macro
 
