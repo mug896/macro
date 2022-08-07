@@ -740,17 +740,26 @@ $ make arch/x86/kernel/vmlinux.lds
 <pre><code class="lang-bash">$ <span class="hljs-built_in">cd</span> linux-source                 <span class="hljs-comment"># &#xC0AC;&#xC6A9; &#xBC29;&#xBC95;</span>
 $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&#xC77C;&#xB9CC; &#xCD9C;&#xB825;&#xB429;&#xB2C8;&#xB2E4;. &#xB9CC;&#xC57D;&#xC5D0; &#xD5E4;&#xB354;&#xC5D0; &#xD3EC;&#xD568;&#xB41C; inline &#xD568;&#xC218;</span>
 . . .                             <span class="hljs-comment"># &#xB0B4;&#xC6A9;&#xC744; &#xBCF4;&#xACE0; &#xC2F6;&#xC73C;&#xBA74; block/ioctl.i &#xD30C;&#xC77C;&#xC744; &#xBCF4;&#xBA74;&#xB429;&#xB2C8;&#xB2E4;.</span>
+
+<span class="hljs-comment"># &quot;-d&quot; (dump) &#xC635;&#xC158;&#xC740; clang-format &#xD558;&#xC9C0; &#xC54A;&#xACE0; &#xCD9C;&#xB825;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xBE60;&#xB974;&#xAC8C; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
+$ header-make <span class="hljs-operator">-d</span> block/ioctl.c
 </code></pre>
 <pre><code class="lang-bash"><span class="hljs-keyword">function</span> header-make ()
 (
     <span class="hljs-built_in">set</span> -o errexit
 
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> <span class="hljs-variable">$#</span> <span class="hljs-operator">-eq</span> <span class="hljs-number">0</span>; <span class="hljs-keyword">then</span>
+    <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> <span class="hljs-operator">-eq</span> <span class="hljs-number">0</span> ]; <span class="hljs-keyword">then</span>
         <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$FUNCNAME</span> filename.c&quot;</span> &gt;&amp;<span class="hljs-number">2</span>
         <span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
+    <span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$#</span> <span class="hljs-operator">-eq</span> <span class="hljs-number">1</span> ]; <span class="hljs-keyword">then</span>
+        target_c=<span class="hljs-variable">$1</span>
+    <span class="hljs-keyword">else</span>
+        [ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> = <span class="hljs-string">&quot;-d&quot;</span> ] &amp;&amp; target_c=<span class="hljs-variable">$2</span> || target_c=<span class="hljs-variable">$1</span>
+        cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_c</span>&quot;</span> | header-dumpk -- -I <span class="hljs-string">&quot;<span class="hljs-variable">${target_c%/*}</span>&quot;</span> | 
+        sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^#define /!p&apos;</span> | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
+        <span class="hljs-built_in">exit</span>
     <span class="hljs-keyword">fi</span>
 
-    target_c=<span class="hljs-variable">$1</span>
     target_i=<span class="hljs-variable">${target_c%.*}</span>.i
 
     <span class="hljs-keyword">if</span> ! target_p=`readlink <span class="hljs-operator">-e</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_c</span>&quot;</span>`; <span class="hljs-keyword">then</span>
@@ -783,11 +792,6 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
 
     cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
 )
-</code></pre>
-<pre><code class="lang-bash"><span class="hljs-comment"># &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; header-* &#xD568;&#xC218;&#xB97C; &#xC774;&#xC6A9;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
-<span class="hljs-comment"># header-dumpk &#xB294; clang-format &#xD558;&#xC9C0; &#xC54A;&#xACE0; &#xCD9C;&#xB825;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xBE60;&#xB974;&#xAC8C; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
-$ cat fs/ext4/file.c | header-dumpk -- -I fs/ext4 | sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^#define /!p&apos;</span>
-$ cat mm/slub.c | header-dumpk -- -I mm | sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^#define /!p&apos;</span>
 </code></pre>
 
                     
