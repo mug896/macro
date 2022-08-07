@@ -760,8 +760,6 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
         <span class="hljs-built_in">exit</span>
     <span class="hljs-keyword">fi</span>
 
-    target_i=<span class="hljs-variable">${target_c%.*}</span>.i
-
     <span class="hljs-keyword">if</span> ! target_p=`readlink <span class="hljs-operator">-e</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_c</span>&quot;</span>`; <span class="hljs-keyword">then</span>
         <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: <span class="hljs-variable">$target_c</span> file does not exist&quot;</span> &gt;&amp;<span class="hljs-number">2</span>
         <span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
@@ -773,6 +771,7 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
     <span class="hljs-built_in">trap</span> <span class="hljs-string">&apos;mv -f &quot;$target_o&quot; &quot;$target_p&quot;; rm -rf &quot;$tmpdir&quot;&apos;</span> EXIT
 
     sed -E -i <span class="hljs-string">&apos;s/^\s*#\s*include .+/\n\a\n&amp;\n\a\n/&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_c</span>&quot;</span>
+    target_i=<span class="hljs-variable">${target_c%.*}</span>.i
 
     <span class="hljs-keyword">if</span> make <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> <span class="hljs-number">2</span>&gt; /dev/null; <span class="hljs-keyword">then</span>
         sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> |
