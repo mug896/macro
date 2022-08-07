@@ -763,31 +763,31 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
     target_o=<span class="hljs-variable">$tmpdir</span>/<span class="hljs-variable">${target_c##*/}</span>
     <span class="hljs-built_in">trap</span> <span class="hljs-string">&apos;mv -f &quot;$target_o&quot; &quot;$target_p&quot;; rm -rf &quot;$tmpdir&quot;&apos;</span> EXIT
 
-    vim=<span class="hljs-string">&quot;vi --not-a-term -R -c &apos;set ft=c&apos; -&quot;</span>
     sed -E -i <span class="hljs-string">&apos;s/^\s*#\s*include .+/\n\a\n&amp;\n\a\n/&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_c</span>&quot;</span>
 
     <span class="hljs-keyword">if</span> make <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> <span class="hljs-number">2</span>&gt; /dev/null; <span class="hljs-keyword">then</span>
         sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> |
         sed -zE <span class="hljs-string">&apos;s/^.*\n# [0-9]+ &quot;&lt;command-line&gt;&quot; [0-9]+\n//&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
-
-        awk -v dir=<span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span> <span class="hljs-string">&apos;BEGIN { num = 0; file = dir &quot;/0000&quot; } 
-            /^}$/ { print &gt; file; close(file); num += 1; 
-                    file = dir sprintf(&quot;/%04d&quot;, num); next }
-            { print &gt; file }&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
-
-        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] |
-            xargs -P `nproc` -i sh -c <span class="hljs-string">&apos;clang-format -i -style=&quot;{IndentWidth: 4}&quot; &quot;{}&quot;&apos;</span>
-
-        cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$vim</span>&quot;</span>
     <span class="hljs-keyword">else</span>
-        cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-macrok -- -I <span class="hljs-string">&quot;<span class="hljs-variable">${target_c%/*}</span>&quot;</span> | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$vim</span>&quot;</span>
+        cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-dumpk -- -I <span class="hljs-string">&quot;<span class="hljs-variable">${target_c%/*}</span>&quot;</span> | 
+        sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^#define /!p&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
     <span class="hljs-keyword">fi</span>
+
+    awk -v dir=<span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span> <span class="hljs-string">&apos;BEGIN { num = 0; file = dir &quot;/0000&quot; } 
+        /^}$/ { print &gt; file; close(file); num += 1; 
+                file = dir sprintf(&quot;/%04d&quot;, num); next }
+        { print &gt; file }&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
+
+    <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] |
+        xargs -P `nproc` -i sh -c <span class="hljs-string">&apos;clang-format -i -style=&quot;{IndentWidth: 4}&quot; &quot;{}&quot;&apos;</span>
+
+    cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
 )
 </code></pre>
 <pre><code class="lang-bash"><span class="hljs-comment"># &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; header-* &#xD568;&#xC218;&#xB97C; &#xC774;&#xC6A9;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
 <span class="hljs-comment"># header-dumpk &#xB294; clang-format &#xD558;&#xC9C0; &#xC54A;&#xACE0; &#xCD9C;&#xB825;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xBE60;&#xB974;&#xAC8C; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
-$ cat fs/ext4/file.c | header-dumpk -- -I fs/ext4
-$ cat mm/slub.c | header-dumpk -- -I mm
+$ cat fs/ext4/file.c | header-dumpk -- -I fs/ext4 | sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^#define /!p&apos;</span>
+$ cat mm/slub.c | header-dumpk -- -I mm | sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^#define /!p&apos;</span>
 </code></pre>
 
                     
