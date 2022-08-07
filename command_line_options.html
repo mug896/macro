@@ -769,8 +769,8 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
         sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> |
         sed -zE <span class="hljs-string">&apos;s/^.*\n# [0-9]+ &quot;&lt;command-line&gt;&quot; [0-9]+\n//&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
 
-        awk -v dir=<span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span> <span class="hljs-string">&apos;BEGIN { num = 0; file = dir &quot;/0000&quot; }
-            /^}$/ { print &gt; file; close(file); num += 1;
+        awk -v dir=<span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span> <span class="hljs-string">&apos;BEGIN { num = 0; file = dir &quot;/0000&quot; } 
+            /^}$/ { print &gt; file; close(file); num += 1; 
                     file = dir sprintf(&quot;/%04d&quot;, num); next }
             { print &gt; file }&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
 
@@ -779,16 +779,15 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
 
         cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
     <span class="hljs-keyword">else</span>
-        cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-macrok | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
+        cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-macrok -- -I <span class="hljs-variable">${target_c%/*}</span> | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
     <span class="hljs-keyword">fi</span>
 )
 </code></pre>
 <pre><code class="lang-bash"><span class="hljs-comment"># &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; header-* &#xD568;&#xC218;&#xB97C; &#xC774;&#xC6A9;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
-<span class="hljs-comment"># &#xC774;&#xB54C;&#xB294; sed &#xB97C; &#xC774;&#xC6A9;&#xD574; #include &quot;ext4.h&quot; --&gt; #include &quot;fs/ext4/ext4.h&quot; &#xB85C; &#xBCC0;&#xACBD;&#xD574; &#xC90D;&#xB2C8;&#xB2E4;.</span>
 <span class="hljs-comment"># header-dumpk &#xB294; clang-format &#xD558;&#xC9C0; &#xC54A;&#xACE0; &#xCD9C;&#xB825;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xBE60;&#xB974;&#xAC8C; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
-$ cat fs/ext4/file.c | sed -E <span class="hljs-string">&apos;s:^(#include &quot;):\1fs/ext4/:&apos;</span> | header-dumpk
+$ cat fs/ext4/file.c | header-dumpk -- -I fs/ext4
 
-$ cat fs/io_uring.c | sed -E <span class="hljs-string">&apos;s:^(#include &quot;):\1fs/:&apos;</span> | header-dumpk
+$ cat fs/io_uring.c | header-dumpk -- -I fs
 </code></pre>
 
                     
