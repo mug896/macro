@@ -787,8 +787,7 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
 <pre><code class="lang-bash"><span class="hljs-comment"># &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; header-* &#xD568;&#xC218;&#xB97C; &#xC774;&#xC6A9;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
 <span class="hljs-comment"># header-dumpk &#xB294; clang-format &#xD558;&#xC9C0; &#xC54A;&#xACE0; &#xCD9C;&#xB825;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xBE60;&#xB974;&#xAC8C; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
 $ cat fs/ext4/file.c | header-dumpk -- -I fs/ext4
-
-$ cat fs/io_uring.c | header-dumpk -- -I fs
+$ cat mm/slub.c | header-dumpk -- -I mm
 </code></pre>
 
                     
