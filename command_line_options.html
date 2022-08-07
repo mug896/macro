@@ -763,6 +763,7 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
     target_o=<span class="hljs-variable">$tmpdir</span>/<span class="hljs-variable">${target_c##*/}</span>
     <span class="hljs-built_in">trap</span> <span class="hljs-string">&apos;mv -f &quot;$target_o&quot; &quot;$target_p&quot;; rm -rf &quot;$tmpdir&quot;&apos;</span> EXIT
 
+    vim=<span class="hljs-string">&quot;vi --not-a-term -R -c &apos;set ft=c&apos; -&quot;</span>
     sed -E -i <span class="hljs-string">&apos;s/^\s*#\s*include .+/\n\a\n&amp;\n\a\n/&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_c</span>&quot;</span>
 
     <span class="hljs-keyword">if</span> make <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> <span class="hljs-number">2</span>&gt; /dev/null; <span class="hljs-keyword">then</span>
@@ -777,9 +778,9 @@ $ header-make block/ioctl.c       <span class="hljs-comment"># ioctl.c &#xD30C;&
         <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] |
             xargs -P `nproc` -i sh -c <span class="hljs-string">&apos;clang-format -i -style=&quot;{IndentWidth: 4}&quot; &quot;{}&quot;&apos;</span>
 
-        cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
+        cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$vim</span>&quot;</span>
     <span class="hljs-keyword">else</span>
-        cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-macrok -- -I <span class="hljs-variable">${target_c%/*}</span> | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
+        cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-macrok -- -I <span class="hljs-string">&quot;<span class="hljs-variable">${target_c%/*}</span>&quot;</span> | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$vim</span>&quot;</span>
     <span class="hljs-keyword">fi</span>
 )
 </code></pre>
