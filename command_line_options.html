@@ -774,11 +774,11 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
     target_i=<span class="hljs-variable">${target_c%.*}</span>.i
 
     <span class="hljs-keyword">if</span> make <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> <span class="hljs-number">2</span>&gt; /dev/null; <span class="hljs-keyword">then</span>
-        sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> |
+        sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^(#define |# [0-9]+ )/!p&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> |
         sed -zE <span class="hljs-string">&apos;s/^.*\n# [0-9]+ &quot;&lt;command-line&gt;&quot; [0-9]+\n//&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
     <span class="hljs-keyword">else</span>
         cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-dumpk -- -I <span class="hljs-string">&quot;<span class="hljs-variable">${target_c%/*}</span>&quot;</span> | 
-        sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^#define /!p&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
+        sed -En <span class="hljs-string">&apos;/\a/,/\a/d; /^(#define |# [0-9]+ )/!p&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
     <span class="hljs-keyword">fi</span>
 
     awk -v dir=<span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span> <span class="hljs-string">&apos;BEGIN { num = 0; file = dir &quot;/0000&quot; } 
