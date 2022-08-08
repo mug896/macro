@@ -776,15 +776,15 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
     <span class="hljs-keyword">if</span> make <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> <span class="hljs-number">2</span>&gt; /dev/null; <span class="hljs-keyword">then</span>
         sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> |
         sed -zE <span class="hljs-string">&apos;s/^.*\n# [0-9]+ &quot;&lt;command-line&gt;&quot; [0-9]+\n//&apos;</span> |
-        sed -En <span class="hljs-string">&apos;/^(#define |# [0-9]+ )/!p&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
+        sed -E <span class="hljs-string">&apos;/^(#define |# [0-9]+ )/d&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
     <span class="hljs-keyword">else</span>
         cat <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> | header-dumpk -- -I <span class="hljs-string">&quot;<span class="hljs-variable">${target_c%/*}</span>&quot;</span> | sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span> |
         sed -zE <span class="hljs-string">&apos;s/^.*\n# [0-9]+ &quot;&lt;command-line&gt;&quot; [0-9]+\n//&apos;</span> |
-        sed -En <span class="hljs-string">&apos;/^(#define |# [0-9]+ )/!p&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
+        sed -E <span class="hljs-string">&apos;/^(#define |# [0-9]+ )/d&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
     <span class="hljs-keyword">fi</span>
 
     <span class="hljs-keyword">if</span> <span class="hljs-variable">$dump</span>; <span class="hljs-keyword">then</span> 
-        cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span> | sed -z <span class="hljs-string">&apos;s/^\n+/\n/&apos;</span> | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
+        cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span> | sed -zE <span class="hljs-string">&apos;s/^\n+/\n/&apos;</span> | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
         <span class="hljs-built_in">exit</span>
     <span class="hljs-keyword">fi</span>
 
