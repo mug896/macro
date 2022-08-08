@@ -782,7 +782,7 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
         sed -E <span class="hljs-string">&apos;/^(#define |# [0-9]+ )/d&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
 
     <span class="hljs-keyword">if</span> <span class="hljs-variable">$dump</span>; <span class="hljs-keyword">then</span> 
-        cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span> | sed -zE <span class="hljs-string">&apos;s/^\n+/\n/&apos;</span> | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
+        sed -zE <span class="hljs-string">&apos;s/^\n+/\n/&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span> | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
         <span class="hljs-built_in">exit</span>
     <span class="hljs-keyword">fi</span>
 
