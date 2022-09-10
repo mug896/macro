@@ -805,7 +805,7 @@ msg
 <pre><code>$ m4 &lt;&lt;\@
 define(`message&apos;, `hello defn&apos;)     1. &#xB9E4;&#xD06C;&#xB85C; message &#xB294; hello defn &#xC73C;&#xB85C; &#xC815;&#xC758;&#xB41C;&#xB2E4;.
 defn(`message&apos;)                     2. `message&apos; &#xC778;&#xC218;&#xB294; prescan &#xC5D0; &#xC758;&#xD574; message &#xAC00; &#xB41C;&#xB2E4;.
-@                                   3. message &#xB294; hello defn &#xC73C;&#xB85C; &#xC815;&#xC758;&#xB418;&#xBBC0;&#xB85C; quote &#xC744;&#xD558;&#xC5EC;
+@                                   3. message &#xB294; hello defn &#xC73C;&#xB85C; &#xC815;&#xC758;&#xB418;&#xBBC0;&#xB85C; quote &#xC744;&#xBD99;&#xC5EC;
                                        &#xCD9C;&#xB825;&#xD558;&#xBA74; `hello defn&apos; &#xAC00; &#xB41C;&#xB2E4;.
 hello defn                          4. &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xC5D0; main scan &#xC774; &#xC77C;&#xC5B4;&#xB098;&#xBA74; quotes &#xC774; &#xC81C;&#xAC70;&#xB41C;&#xB2E4;.
 
@@ -923,7 +923,7 @@ define(`foo&apos;, 100)                    1. foo &#xB9E4;&#xD06C;&#xB85C;&#xB29
 foo( define(`foo&apos;, 200))              2. define &#xB9E4;&#xD06C;&#xB85C;&#xC758; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB294; void &#xC774;&#xBBC0;&#xB85C;      
 foo                                      foo() &#xAC00; &#xD655;&#xC7A5;&#xB418;&#xBA74; &#xACB0;&#xACFC;&#xAC00; 100 &#xC774; &#xB41C;&#xB2E4;.   
 @                                        define &#xBCF4;&#xB2E4; &#xBA3C;&#xC800; foo &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC2E4;&#xD589;&#xC911;&#xC5D0; &#xC788;&#xB294; &#xC0C1;&#xD0DC;&#xC774;&#xBBC0;&#xB85C;
-                                         &#xC778;&#xC218; &#xBD80;&#xBD84;&#xC5D0;&#xC11C;&#xC758; foo &#xC815;&#xC758;&#xB294; &#xC801;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;. 
+                                         &#xC778;&#xC218; &#xBD80;&#xBD84;&#xC5D0;&#xC11C;&#xC758; foo &#xC7AC;&#xC815;&#xC758;&#xB294; &#xC801;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;. 
 100                                   3. &#xC778;&#xC218; &#xBD80;&#xBD84;&#xC5D0;&#xC11C; foo &#xAC00; 200 &#xC73C;&#xB85C; &#xC7AC;&#xC815;&#xC758; &#xB410;&#xC73C;&#xBBC0;&#xB85C;      
 200                                      foo &#xC758; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xB294; 200 &#xC774; &#xB41C;&#xB2E4;.            
 -------------------------------
