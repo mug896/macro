@@ -989,10 +989,13 @@ int (sum)(int a, int b) {
 int main() {
     printf(&quot;%d\n&quot;, sum(1, 2));        // &#xB9E4;&#xD06C;&#xB85C; &#xD638;&#xCD9C;
     printf(&quot;%d\n&quot;, (sum)(1, 2));
+#undef sum
+    printf(&quot;%d\n&quot;, sum(1, 2));
     return 0;
 }
 @
 103
+203
 203
 </code></pre><h1 id="quiz">Quiz</h1>
 <p>&#xB2E4;&#xC74C;&#xC740; <code>pthread_cleanup_push()</code> &#xD568;&#xC218;&#xB97C; &#xC774;&#xC6A9;&#xD574; cleanup &#xD568;&#xC218;&#xB97C; &#xB4F1;&#xB85D;&#xD558;&#xACE0;
