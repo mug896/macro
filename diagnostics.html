@@ -820,16 +820,16 @@ $ header-dump stdlib.h -- -D_GNU_SOURCE
 
     ! <span class="hljs-variable">$all</span> &amp;&amp; all=<span class="hljs-string">&apos;/^#define _/d;&apos;</span> || <span class="hljs-built_in">unset</span> all
 
+    <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span> &amp;&amp; search=<span class="hljs-string">&apos;\w*&apos;</span><span class="hljs-variable">$search</span><span class="hljs-string">&apos;\w*&apos;</span> || search=<span class="hljs-string">&apos;\w+&apos;</span>
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$hsum</span>&quot;</span>; <span class="hljs-keyword">then</span>
         <span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$expand</span>&quot;</span> ; <span class="hljs-keyword">then</span>
             cpp <span class="hljs-operator">-d</span>I -P <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> &lt;&lt;&lt; <span class="hljs-variable">$hsum</span>$<span class="hljs-string">&apos;\n&apos;</span><span class="hljs-variable">$expand</span>$<span class="hljs-string">&apos;\n&apos;</span> | sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span>
         <span class="hljs-keyword">else</span>
-            <span class="hljs-built_in">test</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span> &amp;&amp; search=<span class="hljs-string">&apos;\w*&apos;</span><span class="hljs-variable">$search</span><span class="hljs-string">&apos;\w*&apos;</span> || search=<span class="hljs-string">&apos;\w+&apos;</span>
             cpp <span class="hljs-operator">-d</span>D <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> &lt;&lt;&lt; <span class="hljs-variable">$hsum</span> |
                 sed -En <span class="hljs-string">&quot;<span class="hljs-variable">$all</span>&quot;</span><span class="hljs-string">&apos; /^#define &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;/Ip&apos;</span> | sort
         <span class="hljs-keyword">fi</span>
     <span class="hljs-keyword">else</span>
-        cpp <span class="hljs-operator">-d</span>M <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> /dev/null | sort
+        cpp <span class="hljs-operator">-d</span>M <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> /dev/null | sed -En <span class="hljs-string">&apos;/^#define &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$search</span>&quot;</span><span class="hljs-string">&apos;/Ip&apos;</span> | sort
     <span class="hljs-keyword">fi</span> | <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$clang_format</span>&quot;</span>
 }
 
