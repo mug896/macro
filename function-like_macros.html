@@ -713,12 +713,35 @@ FD_SET(foo, &amp;bar);     // fd foo &#xB97C; fd_set bar &#xC5D0; &#xB354;&#xD55
 (1UL &lt;&lt; ((foo) % (8 * (int) sizeof (__fd_mask)))))));
 </code></pre><h4 id="statement-&#xC758;-&#xD2B9;&#xC815;-&#xBD80;&#xBD84;&#xB9CC;-&#xB9E4;&#xD06C;&#xB85C;&#xB85C;-&#xC815;&#xC758;&#xD574;-&#xC0AC;&#xC6A9;&#xD560;-&#xC218;&#xB3C4;-&#xC788;&#xC2B5;&#xB2C8;&#xB2E4;">Statement &#xC758; &#xD2B9;&#xC815; &#xBD80;&#xBD84;&#xB9CC; &#xB9E4;&#xD06C;&#xB85C;&#xB85C; &#xC815;&#xC758;&#xD574; &#xC0AC;&#xC6A9;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</h4>
 <pre><code>$ gcpp
-#define foo(file) fprintf (file, &quot;%s %d&quot;,
+#define PRINT2(file) fprintf (file, &quot;%s %d&quot;,
 
-foo(stderr) p, 35)
+PRINT2(stderr) p, 35)
 @
 
 fprintf (stderr, &quot;%s %d&quot;, p, 35)
+</code></pre><p>&#xB2E4;&#xC74C;&#xC758; &#xACBD;&#xC6B0; &#xCCAB; &#xBC88;&#xC9F8; CHECK_STRING_OVERRUN &#xC544;&#xB798;&#xC5D0; &#xC788;&#xB294; <code>i = si + 1;</code> &#xB294;
+else &#xBB38;&#xC5D0; &#xD3EC;&#xD568;&#xB418;&#xB294; &#xAC83;&#xC774;&#xACE0; &#xB450; &#xBC88;&#xC9F8; CHECK_STRING_OVERRUN &#xC544;&#xB798;&#xC5D0; &#xC788;&#xB294; <code>continue;</code> &#xB294;
+else &#xBB38;&#xC5D0; &#xD3EC;&#xD568;&#xB418;&#xC9C0; &#xC54A;&#xB294; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.</p>
+<pre><code>$ gcpp
+#define CHECK_STRING_OVERRUN(oind, ind, len, ch) \
+if (ind &gt;= len) { \
+    oind = len; \
+    ch = 0; \
+    break; \
+} \
+else
+
+CHECK_STRING_OVERRUN(i, si, slen, c)       // ---- (1)
+i = si + 1;
+
+CHECK_STRING_OVERRUN(i, si, slen, c);      // ---- (2)
+continue;
+@
+
+if (si &gt;= slen) { i = slen; c = 0; break; } else
+i = si + 1;     // else &#xBB38;&#xC5D0; &#xD3EC;&#xD568;&#xB428;
+if (si &gt;= slen) { i = slen; c = 0; break; } else;
+continue;       // else &#xBB38;&#xC5D0; &#xD3EC;&#xD568;&#xB418;&#xC9C0; &#xC54A;&#xC73C;&#xBBC0;&#xB85C; &#xD56D;&#xC0C1; &#xC2E4;&#xD589;&#xB428;
 </code></pre><h4 id="&#xB9E4;&#xAC1C;&#xBCC0;&#xC218;&#xC640;-&#xC804;&#xCCB4;-&#xC2DD;&#xC740;-&#xAD04;&#xD638;&#xCC98;&#xB9AC;&#xB97C;-&#xD574;&#xC57C;-&#xD569;&#xB2C8;&#xB2E4;">&#xB9E4;&#xAC1C;&#xBCC0;&#xC218;&#xC640; &#xC804;&#xCCB4; &#xC2DD;&#xC740; &#xAD04;&#xD638;&#xCC98;&#xB9AC;&#xB97C; &#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</h4>
 <p>C/C++ &#xC5D0;&#xC11C; &#xD568;&#xC218;&#xB97C; &#xD638;&#xCD9C;&#xD560; &#xB54C; &#xC778;&#xC218;&#xB85C; expression &#xC774; &#xC0AC;&#xC6A9;&#xB418;&#xBA74; &#xBA3C;&#xC800; &#xC5F0;&#xC0B0;&#xC774; &#xC644;&#xB8CC;&#xB41C; &#xD6C4;
 &#xACB0;&#xACFC;&#xAC12;&#xC774; &#xC804;&#xB2EC;&#xB418;&#xC9C0;&#xB9CC; &#xB9E4;&#xD06C;&#xB85C;&#xC758; &#xACBD;&#xC6B0;&#xB294; expression &#xC790;&#xCCB4;&#xAC00; &#xADF8;&#xB300;&#xB85C; &#xC804;&#xB2EC;&#xB418;&#xC5B4; &#xCE58;&#xD658;&#xB429;&#xB2C8;&#xB2E4;.
