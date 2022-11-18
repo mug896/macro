@@ -756,6 +756,7 @@ $ header-dump <span class="hljs-operator">-l</span> stdio.h
 
 <span class="hljs-comment"># &#xAE30;&#xD0C0; cpp &#xC635;&#xC158;&#xC744; &#xCD94;&#xAC00;&#xD558;&#xB824;&#xBA74; &#xB9C8;&#xC9C0;&#xB9C9;&#xC5D0; &apos;--&apos; &#xBD99;&#xC774;&#xACE0; &#xCD94;&#xAC00;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</span>
 $ header-dump stdlib.h -- -D_GNU_SOURCE
+$ header-macro -- -I . -I include &lt; foo.c
 </code></pre>
 <p>&#xD568;&#xC218; &#xC0AC;&#xC6A9;&#xC744; &#xC704;&#xD574;&#xC120; <code>clang-format</code> &#xBA85;&#xB839;&#xC774; &#xC788;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</p>
 <pre><code class="lang-bash"><span class="hljs-keyword">function</span> header-<span class="hljs-function"><span class="hljs-title">dump</span></span> ()
