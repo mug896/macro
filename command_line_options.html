@@ -770,7 +770,7 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
     tmpdir=`mktemp <span class="hljs-operator">-d</span> -p /dev/shm`
     cp <span class="hljs-operator">-f</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_p</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>
     target_o=<span class="hljs-variable">$tmpdir</span>/<span class="hljs-variable">${target_c##*/}</span>
-    <span class="hljs-built_in">trap</span> <span class="hljs-string">&apos;mv -f &quot;$target_o&quot; &quot;$target_p&quot;; rm -rf &quot;$tmpdir&quot;&apos;</span> EXIT
+    <span class="hljs-built_in">trap</span> <span class="hljs-string">&apos;[[ -e $target_o ]] &amp;&amp; mv -f &quot;$target_o&quot; &quot;$target_p&quot;; rm -rf &quot;$tmpdir&quot;&apos;</span> EXIT
 
     sed -E -i <span class="hljs-string">&apos;s/^\s*#\s*include .+/\n\a\n&amp;\n\a\n/&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_c</span>&quot;</span>
     target_i=<span class="hljs-variable">${target_c%.*}</span>.i
@@ -796,6 +796,7 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
     <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] |
         xargs -P `nproc` -i sh -c <span class="hljs-string">&apos;clang-format -i -style=&quot;{IndentWidth: 4}&quot; &quot;{}&quot;&apos;</span>
 
+    mv <span class="hljs-operator">-f</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_p</span>&quot;</span>
     cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
 )
 </code></pre>
