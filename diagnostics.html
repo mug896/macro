@@ -854,7 +854,7 @@ $ header-macro -- -I . -I include &lt; foo.c
     _header-args <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> || <span class="hljs-built_in">return</span>
     <span class="hljs-built_in">eval</span> <span class="hljs-built_in">set</span> -- <span class="hljs-variable">$opts</span>
 
-    r=<span class="hljs-string">&apos;([][[:alnum:]_]|( *)?,( *)?|[*]( *)?)&apos;</span>
+    r=<span class="hljs-string">&apos;([][[:alnum:]_]|[ ]*,[ ]*|[*][ ]*)&apos;</span>
     <span class="hljs-keyword">if</span> ! <span class="hljs-variable">$all</span>; <span class="hljs-keyword">then</span>
         all1=<span class="hljs-string">&apos;/\b[[:alpha:]]&apos;</span><span class="hljs-variable">$r</span>*<span class="hljs-string">&apos;;$/!b;&apos;</span> 
         all2=<span class="hljs-string">&apos;/\b[[:alpha:]]&apos;</span><span class="hljs-variable">$r</span>*<span class="hljs-string">&apos;\)?\(/!b;&apos;</span> 
