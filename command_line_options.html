@@ -798,7 +798,7 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
         xargs -P `nproc` -i sh -c <span class="hljs-string">&apos;clang-format -i -style=&quot;{IndentWidth: 4}&quot; &quot;{}&quot;&apos;</span>
 
     mv <span class="hljs-operator">-f</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_o</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_p</span>&quot;</span>
-    cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | vi --not<span class="hljs-operator">-a</span>-term -R -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
+    cat <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>&quot;</span>/[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] | vi --not<span class="hljs-operator">-a</span>-term -c <span class="hljs-string">&apos;set ft=c&apos;</span> -
 )
 </code></pre>
 
