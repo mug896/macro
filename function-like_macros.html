@@ -793,7 +793,7 @@ min &#xD568;&#xC218; &#xC2E4;&#xD589;&#xC804;&#xC5D0; &#xD55C;&#xBC88;&#xB9CC; &
 <pre><code>$ gcpp
 #define min(X, Y)  ((X) &lt; (Y) ? (X) : (Y))
 
-next = min (x++, foo(y));
+next = min(x++, foo(y));
 @
 
 next = ((x++) &lt; (foo(y)) ? (x++) : (foo(y)));   # x++ &#xC640; foo(y) &#xAC00; &#xB450;&#xBC88;&#xC529; &#xC2E4;&#xD589;&#xB420; &#xC218; &#xC788;&#xB2E4;.
