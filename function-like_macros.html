@@ -787,7 +787,7 @@ sizeof ceil_div(x, y)
 
 sizeof (((x) + (y) - 1) / (y))
 </code></pre><h4 id="duplicate-side-effects-&#xAC00;-&#xBC1C;&#xC0DD;&#xD560;-&#xC218;-&#xC788;&#xC2B5;&#xB2C8;&#xB2E4;">Duplicate side effects &#xAC00; &#xBC1C;&#xC0DD;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</h4>
-<p>&#xB9CC;&#xC57D;&#xC5D0; <code>min(X, Y)</code> &#xB9E4;&#xD06C;&#xB85C;&#xAC00; C/C++ &#xD568;&#xC218;&#xB77C;&#xBA74; &#xC778;&#xC218;&#xC5D0; &#xC0AC;&#xC6A9;&#xB41C; <code>x++</code> &#xC640; <code>foo(y)</code> &#xB294; 
+<p>&#xB9CC;&#xC57D;&#xC5D0; <code>min(X, Y)</code> &#xAC00; C/C++ &#xD568;&#xC218;&#xB77C;&#xBA74; &#xC778;&#xC218;&#xC5D0; &#xC0AC;&#xC6A9;&#xB41C; <code>x++</code> &#xC640; <code>foo(y)</code> &#xB294; 
 min &#xD568;&#xC218; &#xC2E4;&#xD589;&#xC804;&#xC5D0; &#xD55C;&#xBC88;&#xB9CC; &#xC2E4;&#xD589;&#xC774; &#xB418;&#xC9C0;&#xB9CC; &#xB9E4;&#xD06C;&#xB85C;&#xC758; &#xACBD;&#xC6B0;&#xB294; expression &#xC774; &#xADF8;&#xB300;&#xB85C; &#xC804;&#xB2EC;&#xB418;&#xC5B4;
 &#xCE58;&#xD658;&#xB418;&#xBBC0;&#xB85C; &#xC544;&#xB798; &#xD655;&#xC7A5; &#xACB0;&#xACFC;&#xC5D0;&#xC11C; &#xBCFC; &#xC218; &#xC788;&#xB4EF;&#xC774; &#xD574;&#xB2F9; expression &#xC774; &#xC5EC;&#xB7EC;&#xBC88; &#xC2E4;&#xD589;&#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
 <pre><code>$ gcpp
@@ -801,12 +801,19 @@ next = ((x++) &lt; (foo(y)) ? (x++) : (foo(y)));   # x++ &#xC640; foo(y) &#xAC00
 <blockquote>
 <p>compound statment expression &#xC740; &#xB9C8;&#xC9C0;&#xB9C9; statement &#xAC12;&#xC774; &#xC0AC;&#xC6A9;&#xB429;&#xB2C8;&#xB2E4;.</p>
 </blockquote>
-<pre><code>// x++ &#xC640; foo(y) &#xB97C; x_, y_ &#xC784;&#xC2DC; &#xBCC0;&#xC218;&#xC5D0; &#xB300;&#xC785;&#xD574; &#xC0AC;&#xC6A9;&#xD558;&#xBBC0;&#xB85C; &#xD55C; &#xBC88;&#xB9CC; &#xC2E4;&#xD589;&#xC774; &#xB41C;&#xB2E4;.
+<pre><code>// x++ &#xC640; foo(y) &#xB97C; _x, _y &#xC784;&#xC2DC; &#xBCC0;&#xC218;&#xC5D0; &#xB300;&#xC785;&#xD574; &#xC0AC;&#xC6A9;&#xD558;&#xBBC0;&#xB85C; &#xD55C;&#xBC88;&#xB9CC; &#xC2E4;&#xD589;&#xC774; &#xB41C;&#xB2E4;.
 
-#define min(X, Y)                \
-({ typeof (X) x_ = (X);          \
-   typeof (Y) y_ = (Y);          \
-   (x_ &lt; y_) ? x_ : y_; })
+#define min(X, Y) \
+({ typeof (X) _x = (X); \
+   typeof (Y) _y = (Y); \
+   (_x &lt; _y) ? _x : _y; })
+
+---------------------------------
+
+#define min(X, Y) \
+({ __auto_type _x = (X); \        // __auto_type &#xC740; &#xB4A4;&#xC5D0; &#xBC14;&#xB85C; identifier &#xAC00; &#xC635;&#xB2C8;&#xB2E4;.
+   __auto_type _y = (Y); \        // &#xB9E4;&#xD06C;&#xB85C; &#xC778;&#xC218;&#xB85C; &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC0AC;&#xC6A9;&#xB418;&#xB294;&#xAC83; &#xAC19;&#xC774; nesting
+   (_x &lt; _y) ? _x : _y; })        // &#xB420;&#xACBD;&#xC6B0; typeof &#xC5D0; &#xBE44;&#xD574; &#xD655;&#xC7A5;&#xACB0;&#xACFC;&#xAC00; &#xC904;&#xC5B4;&#xB4ED;&#xB2C8;&#xB2E4;.
 
 ---------------------------------
 
