@@ -857,12 +857,11 @@ array(pointer(char), 10) s5;       ---&gt;  typeof(typeof(char *)[10]) s5; &#xB8
 $ gcc -xc - &lt;&lt;\@ &amp;&amp; ./a.out
 #include &lt;stdio.h&gt;
 #define offsetof(type, member) ((size_t) &amp;((type *)0)-&gt;member)
-#define container_of(ptr, type, member) ({                        \
-    void *__mptr = (void *)(ptr);                                 \
+#define container_of(ptr, type, member) ({ \
+    void *__mptr = (void *)(ptr); \
     ((type *)(__mptr - offsetof(type, member))); })
 
-struct mytype
-{
+struct mytype {
     char foo;
     int bar;
 } con;
