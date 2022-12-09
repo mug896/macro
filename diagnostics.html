@@ -980,6 +980,12 @@ assert(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
 i = <span class="hljs-number">20</span>, j = <span class="hljs-number">2</span> * i, ;                <span class="hljs-comment"># &#xBB38;&#xBC95;&#xC0C1; &#xC624;&#xB958;&#xAC00; &#xB41C;&#xB2E4;.</span>
 
 i = <span class="hljs-number">20</span>, j = <span class="hljs-number">2</span> * i, ((void)(<span class="hljs-number">0</span>));     <span class="hljs-comment"># &#xC624;&#xB958;&#xAC00; &#xB418;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;.</span>
+
+int <span class="hljs-function"><span class="hljs-title">main</span></span>()
+{                  <span class="hljs-comment"># (void) &#xB97C; &#xBD99;&#xC774;&#xB294; &#xC774;&#xC720;&#xB294;</span>
+    <span class="hljs-number">0</span>;             <span class="hljs-comment"># &#xC774;&#xAC83;&#xC740; warning &#xC774; &#xB41C;&#xB2E4;.</span>
+    (void)<span class="hljs-number">0</span>;       <span class="hljs-comment"># OK</span>
+}
 </code></pre>
 <h1 id="4-">4 .</h1>
 <p>&#xC624;&#xB958;&#xCF54;&#xB4DC; &#xC911;&#xC5D0; &#xD558;&#xB098;&#xC778; <code>EWOULDBLOCK</code> &#xACFC; <code>EAGAIN</code> &#xC740; &#xC5B4;&#xB5A4; &#xCC28;&#xC774;&#xAC00; &#xC788;&#xC744;&#xAE4C;&#xC694;?</p>
