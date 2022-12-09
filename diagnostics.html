@@ -943,7 +943,7 @@ $ header-macro -- -I . -I include &lt; foo.c
 <h1 id="3-">3 .</h1>
 <p>&#xBCF4;&#xD1B5; release &#xBE4C;&#xB4DC; &#xC2DC;&#xC5D0;&#xB294; &#xCEF4;&#xD30C;&#xC77C;&#xB7EC;&#xC5D0; <code>-D NDEBUG</code> &#xC635;&#xC158;&#xC744; &#xC8FC;&#xC5B4; &#xCF54;&#xB4DC; &#xB0B4;&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xC911;&#xC778;
 assert &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC81C;&#xAC70;&#xD569;&#xB2C8;&#xB2E4;. 
-&#xADF8;&#xB7F0;&#xB370; &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xB97C; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74; empty &#xAC12;&#xC774; &#xC544;&#xB2C8;&#xB77C; <code>((void)0)</code> &#xAC00; &#xC0AC;&#xC6A9;&#xB418;&#xB294; &#xAC83;&#xC744;
+&#xADF8;&#xB7F0;&#xB370; assert &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xB97C; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74; empty &#xAC12;&#xC774; &#xC544;&#xB2C8;&#xB77C; <code>((void)0)</code> &#xAC00; &#xC0AC;&#xC6A9;&#xB418;&#xB294; &#xAC83;&#xC744;
 &#xBCFC; &#xC218; &#xC788;&#xB294;&#xB370;&#xC694;. &#xC65C; &#xADF8;&#xB7F4;&#xAE4C;&#xC694;?</p>
 <pre><code class="lang-sh">$ header-dump assert.h | grep <span class="hljs-string">&apos;#define assert&apos;</span>
 <span class="hljs-comment">#define assert(expr) ((void) sizeof ((expr) ? 1 : 0), __extension__ ({ if (expr) ; else __assert_fail (#expr, __FILE__, __LINE__, __ASSERT_FUNCTION); }))</span>
