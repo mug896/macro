@@ -941,6 +941,47 @@ $ header-macro -- -I . -I include &lt; foo.c
 }
 </span></code></pre>
 <h1 id="3-">3 .</h1>
+<p>&#xBCF4;&#xD1B5; release &#xBE4C;&#xB4DC; &#xC2DC;&#xC5D0;&#xB294; &#xCEF4;&#xD30C;&#xC77C;&#xB7EC;&#xC5D0; <code>-D NDEBUG</code> &#xC635;&#xC158;&#xC744; &#xC8FC;&#xC5B4; &#xCF54;&#xB4DC; &#xB0B4;&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xC911;&#xC778;
+assert &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC81C;&#xAC70;&#xD569;&#xB2C8;&#xB2E4;. 
+&#xADF8;&#xB7F0;&#xB370; &#xB9E4;&#xD06C;&#xB85C; &#xC815;&#xC758;&#xB97C; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74; empty &#xAC12;&#xC774; &#xC544;&#xB2C8;&#xB77C; <code>((void)0)</code> &#xAC00; &#xC0AC;&#xC6A9;&#xB418;&#xB294; &#xAC83;&#xC744;
+&#xBCFC; &#xC218; &#xC788;&#xB294;&#xB370;&#xC694;. &#xC65C; &#xADF8;&#xB7F4;&#xAE4C;&#xC694;?</p>
+<pre><code class="lang-sh">$ header-dump assert.h | grep <span class="hljs-string">&apos;#define assert&apos;</span>
+<span class="hljs-comment">#define assert(expr) ((void) sizeof ((expr) ? 1 : 0), __extension__ ({ if (expr) ; else __assert_fail (#expr, __FILE__, __LINE__, __ASSERT_FUNCTION); }))</span>
+
+$ header-macro &lt;&lt;\@
+<span class="hljs-comment">#include &lt;assert.h&gt;</span>
+assert(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
+@
+((void)sizeof((<span class="hljs-number">1</span> == <span class="hljs-number">1</span>) ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>), __extension__({
+     <span class="hljs-keyword">if</span> (<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
+         ;
+     <span class="hljs-keyword">else</span>
+         __assert_fail(<span class="hljs-string">&quot;1 == 1&quot;</span>, <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, <span class="hljs-number">5</span>,
+                       __extension__ __PRETTY_FUNCTION__);
+ }))
+
+--------------   -D NDEBUG &#xC635;&#xC158;&#xC744; &#xC774;&#xC6A9;&#xD55C; release &#xBE4C;&#xB4DC;&#xC2DC;   --------------
+
+$ header-dump assert.h -- -D NDEBUG | grep <span class="hljs-string">&apos;#define assert&apos;</span>
+<span class="hljs-comment">#define assert(expr) (__ASSERT_VOID_CAST (0))</span>
+
+$ header-macro -- -D NDEBUG &lt;&lt;\@
+<span class="hljs-comment">#include &lt;assert.h&gt;</span>
+assert(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
+@
+((void)(<span class="hljs-number">0</span>))
+</code></pre>
+<p>C/C++ &#xC5D0;&#xC11C;&#xB294; <code>,</code> operator &#xAC00; &#xC788;&#xC5B4;&#xC11C; expression &#xC744; &#xC5F0;&#xC774;&#xC5B4;&#xC11C; &#xC4F8;&#xC218;&#xAC00; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.
+&#xB9CC;&#xC57D;&#xC5D0; <code>-D NDEBUG</code> &#xC635;&#xC158;&#xC744; &#xC124;&#xC815;&#xD588;&#xC744; &#xB54C; assert &#xB9E4;&#xD06C;&#xB85C;&#xB97C; empty &#xB85C; &#xC124;&#xC815;&#xD55C;&#xB2E4;&#xBA74;
+&#xC544;&#xB798; &#xB450; &#xBC88;&#xC9F8;&#xC640; &#xAC19;&#xC740; &#xACB0;&#xACFC;&#xAC00; &#xB418;&#xC5B4; &#xBB38;&#xBC95;&#xC0C1; &#xC624;&#xB958;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.
+&#xB530;&#xB77C;&#xC11C; &#xC544;&#xBB34; &#xAE30;&#xB2A5;&#xB3C4; &#xD558;&#xC9C0; &#xC54A;&#xB294; <code>#define assert(expr) ((void)(0))</code> &#xB97C; &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-sh">i = <span class="hljs-number">20</span>, j = <span class="hljs-number">2</span> * i, assert(i == j);
+
+i = <span class="hljs-number">20</span>, j = <span class="hljs-number">2</span> * i, ;                <span class="hljs-comment"># &#xBB38;&#xBC95;&#xC0C1; &#xC624;&#xB958;&#xAC00; &#xB41C;&#xB2E4;.</span>
+
+i = <span class="hljs-number">20</span>, j = <span class="hljs-number">2</span> * i, ((void)(<span class="hljs-number">0</span>));     <span class="hljs-comment"># &#xC624;&#xB958;&#xAC00; &#xB418;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;.</span>
+</code></pre>
+<h1 id="4-">4 .</h1>
 <p>&#xC624;&#xB958;&#xCF54;&#xB4DC; &#xC911;&#xC5D0; &#xD558;&#xB098;&#xC778; <code>EWOULDBLOCK</code> &#xACFC; <code>EAGAIN</code> &#xC740; &#xC5B4;&#xB5A4; &#xCC28;&#xC774;&#xAC00; &#xC788;&#xC744;&#xAE4C;&#xC694;?</p>
 <p><code>EWOULDBLOCK</code> &#xC758; &#xC758;&#xBBF8;&#xB294; &quot;operation would block&quot; &#xC744; &#xB098;&#xD0C0;&#xB0B4;&#xACE0;
 <code>EAGAIN</code> &#xB294; &quot;temporary resource shortage made an operation impossible&quot; &#xC744; &#xB098;&#xD0C0;&#xB0C8;&#xB294;&#xB370;
@@ -965,7 +1006,7 @@ $ header-macro errno.h -s EWOULDBLOCK
 
   <span class="hljs-keyword">if</span> ( errno == EWOULDBLOCK || errno == EAGAIN ) { ...
 </code></pre>
-<h1 id="4-">4 .</h1>
+<h1 id="5-">5 .</h1>
 <p><code>socket</code> &#xD568;&#xC218;&#xC758; &#xC6D0;&#xD615;&#xC740; &#xC544;&#xB798;&#xC640; &#xAC19;&#xC740;&#xB370;&#xC694;. 
 &#xC5EC;&#xAE30;&#xC11C; &#xC138; &#xBC88;&#xC9F8; &#xC778;&#xC218;&#xC778; <em>protocol</em> &#xAC12;&#xC73C;&#xB85C; <code>0</code> &#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xACBD;&#xC6B0;&#xAC00; &#xB9CE;&#xC2B5;&#xB2C8;&#xB2E4;.
 &#xC5EC;&#xAE30;&#xC11C; <code>0</code> &#xC740; &#xC5B4;&#xB5A4; &#xAC12;&#xC77C;&#xAE4C;&#xC694; ?</p>
