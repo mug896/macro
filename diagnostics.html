@@ -988,62 +988,44 @@ int <span class="hljs-function"><span class="hljs-title">main</span></span>()
 }
 </code></pre>
 <h1 id="4-">4 .</h1>
-<p>&#xC624;&#xB958;&#xCF54;&#xB4DC; &#xC911;&#xC5D0; &#xD558;&#xB098;&#xC778; <code>EWOULDBLOCK</code> &#xACFC; <code>EAGAIN</code> &#xC740; &#xC5B4;&#xB5A4; &#xCC28;&#xC774;&#xAC00; &#xC788;&#xC744;&#xAE4C;&#xC694;?</p>
-<p><code>EWOULDBLOCK</code> &#xC758; &#xC758;&#xBBF8;&#xB294; &quot;operation would block&quot; &#xC744; &#xB098;&#xD0C0;&#xB0B4;&#xACE0;
-<code>EAGAIN</code> &#xB294; &quot;temporary resource shortage made an operation impossible&quot; &#xC744; &#xB098;&#xD0C0;&#xB0C8;&#xB294;&#xB370;
-&#xD604;&#xC7AC;&#xB294; &#xB450; &#xB9E4;&#xD06C;&#xB85C; &#xAC12;&#xC744; &#xAD6C;&#xBD84; &#xC5C6;&#xC774; &#xAC19;&#xC740; &#xAC12;&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-c">$ header-macro errno.h -e EWOULDBLOCK       <span class="hljs-comment">// Resource temporarily unavailable</span>
-<span class="hljs-number">11</span>
-
-$ header-macro errno.h -e EAGAIN            <span class="hljs-comment">// Resource temporarily unavailable</span>
-<span class="hljs-number">11</span>
-
-$ header-macro errno.h -s EWOULDBLOCK
-<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> EWOULDBLOCK EAGAIN</span>
+<p><code>stdatomic.h</code> &#xD5E4;&#xB354;&#xB97C; &#xBCF4;&#xBA74; &#xC544;&#xB798;&#xC640; &#xAC19;&#xC774; <code>__typeof__</code> &#xC5D0; <code>(void)0</code> &#xAC00; &#xC0AC;&#xC6A9;&#xB41C; &#xAC83;&#xC744; 
+&#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;. &#xC5EC;&#xAE30;&#xC11C; <code>(void)0</code> &#xB294; &#xC544;&#xBB34; &#xAE30;&#xB2A5;&#xB3C4; &#xD558;&#xC9C0; &#xC54A;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xC5C6;&#xC5B4;&#xB3C4; &#xB420;&#xAC83; &#xAC19;&#xC740;&#xB370;
+&#xC65C; &#xADF8;&#xB7F4;&#xAE4C;&#xC694;?</p>
+<pre><code class="lang-c"><span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> atomic_store_explicit(PTR, VAL, MO)  \
+  __extension__  \
+  ({  \
+    __auto_type __atomic_store_ptr = (PTR);  \
+    __typeof__ ((void)<span class="hljs-number">0</span>, *__atomic_store_ptr) __atomic_store_tmp = (VAL);  \
+    __atomic_store (__atomic_store_ptr, &amp;__atomic_store_tmp, (MO));  \
+  })</span>
 </code></pre>
-<p>&#xD558;&#xC9C0;&#xB9CC; 2002 &#xB144; &#xC774;&#xC804;&#xC758; AIX 4.3,5.1  HP-UX 11.22  OSF1 &#xAC19;&#xC740; &#xC6B4;&#xC601;&#xCCB4;&#xC81C;&#xC5D0;&#xC11C;&#xB294; 
-&#xB2E4;&#xB978; &#xAC12;&#xC744; &#xC0AC;&#xC6A9;&#xD588;&#xB2E4;&#xACE0; &#xD569;&#xB2C8;&#xB2E4;.
-&#xC774;&#xB54C;&#xB3C4; &#xB9E4;&#xD06C;&#xB85C; &#xAC12;&#xC740; &#xB2E4;&#xB974;&#xC9C0;&#xB9CC; &#xAC19;&#xC740; &#xC758;&#xBBF8;&#xB85C; &#xC0AC;&#xC6A9;&#xB410;&#xC73C;&#xBBC0;&#xB85C;
-&#xC774;&#xC640; &#xAC19;&#xC740; &#xAD6C; &#xBC84;&#xC804;&#xC758; OS &#xB3C4; &#xC9C0;&#xC6D0;&#xD558;&#xB824;&#xBA74; &#xB2E4;&#xC74C; &#xC138; &#xBC88;&#xC9F8;&#xC640; &#xAC19;&#xC774; &#xC791;&#xC131;&#xD558;&#xBA74; &#xB418;&#xACE0;
-&#xADF8;&#xB807;&#xC9C0; &#xC54A;&#xC744; &#xACBD;&#xC6B0;&#xB294; &#xCCAB; &#xBC88;&#xC9F8;&#xC640; &#xB450; &#xBC88;&#xC9F8;&#xB294; &#xCC28;&#xC774;&#xAC00; &#xC5C6;&#xC2B5;&#xB2C8;&#xB2E4;. </p>
-<pre><code class="lang-c">  <span class="hljs-keyword">if</span> ( errno == EAGAIN ) { ...
+<p><code>__typeof__ ((void)0, *__atomic_store_ptr)</code> &#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xB41C; <code>(void)0</code> &#xB294; <code>,</code> operator &#xB97C; 
+&#xC0AC;&#xC6A9;&#xD558;&#xAE30; &#xC704;&#xD574; &#xCD94;&#xAC00;&#xB41C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.
+<code>,</code> operator &#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xB41C; &#xC2DD;&#xC740; ( &#xC5EC;&#xAE30;&#xC11C;&#xB294; <code>*__atomic_store_ptr</code> &#xAC00; &#xB418;&#xACA0;&#xC8E0; )
+&#xC790;&#xB3D9;&#xC73C;&#xB85C; L-value conversion &#xB300;&#xC0C1;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.
+&#xC608;&#xB97C; &#xB4E4;&#xC5B4; <code>((void)0, X)</code> &#xC5D0;&#xC11C; X &#xAC12;&#xC774; <code>int[3]</code> &#xC77C; &#xACBD;&#xC6B0;&#xB294; <code>int*</code> &#xB85C; &#xBCC0;&#xACBD;&#xC774; &#xB418;&#xACE0;,
+<code>int(void)</code> &#xC640; &#xAC19;&#xC740; &#xD568;&#xC218;&#xB77C;&#xBA74; <code>int(*)(void)</code> &#xB85C; &#xBCC0;&#xACBD;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.
+&#xB610;&#xD55C; <code>volatile</code>, <code>const</code> or <code>_Atomic</code> &#xAC19;&#xC740; &#xD55C;&#xC815;&#xC790;&#xB3C4; &#xC790;&#xB3D9;&#xC73C;&#xB85C; &#xC81C;&#xAC70;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-c"><span class="hljs-keyword">int</span> arr[<span class="hljs-number">3</span>];
+<span class="hljs-keyword">int</span> (*ptr)[<span class="hljs-number">3</span>];
 
-  <span class="hljs-keyword">if</span> ( errno == EWOULDBLOCK ) { ...
+atomic_store_explicit(ptr, &amp;arr, XXX);
 
-  <span class="hljs-keyword">if</span> ( errno == EWOULDBLOCK || errno == EAGAIN ) { ...
-</code></pre>
-<h1 id="5-">5 .</h1>
-<p><code>socket</code> &#xD568;&#xC218;&#xC758; &#xC6D0;&#xD615;&#xC740; &#xC544;&#xB798;&#xC640; &#xAC19;&#xC740;&#xB370;&#xC694;. 
-&#xC5EC;&#xAE30;&#xC11C; &#xC138; &#xBC88;&#xC9F8; &#xC778;&#xC218;&#xC778; <em>protocol</em> &#xAC12;&#xC73C;&#xB85C; <code>0</code> &#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xACBD;&#xC6B0;&#xAC00; &#xB9CE;&#xC2B5;&#xB2C8;&#xB2E4;.
-&#xC5EC;&#xAE30;&#xC11C; <code>0</code> &#xC740; &#xC5B4;&#xB5A4; &#xAC12;&#xC77C;&#xAE4C;&#xC694; ?</p>
-<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">socket</span><span class="hljs-params">( <span class="hljs-keyword">int</span> domain, <span class="hljs-keyword">int</span> type, <span class="hljs-keyword">int</span> protocol )</span></span>;
+<span class="hljs-comment">// &#xC5EC;&#xAE30;&#xC11C; __atomic_store_ptr &#xC758; &#xD0C0;&#xC785;&#xC740; (ptr) &#xAC12;&#xC5D0; &#xB530;&#xB77C;  int(*)[3] &#xC774; &#xB429;&#xB2C8;&#xB2E4;.</span>
+__auto_type __atomic_store_ptr = (ptr);
 
-<span class="hljs-keyword">int</span> sockfd = socket( AF_INET, SOCK_STREAM, <span class="hljs-number">0</span> );
-<span class="hljs-keyword">int</span> sockfd = socket( AF_INET, SOCK_DGRAM, <span class="hljs-number">0</span> );
+<span class="hljs-comment">// &#xB9CC;&#xC57D;&#xC5D0; (void)0, &#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;&#xBA74; *__atomic_store_ptr &#xC740; dereferencing &#xC5D0; &#xC758;&#xD574; </span>
+<span class="hljs-comment">// __typeof__ (*__atomic_store_ptr) &#xC758; &#xD0C0;&#xC785;&#xC740; int[3] &#xC774; &#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</span>
+__typeof__ (*__atomic_store_ptr) __atomic_store_tmp = (VAL);
 
-<span class="hljs-keyword">int</span> sockfd = socket( AF_UNIX, SOCK_STREAM, <span class="hljs-number">0</span> );
-</code></pre>
-<p><code>AF_INET</code> &#xC758; <em>protocol</em> &#xAC12;&#xC73C;&#xB85C; &#xC0AC;&#xC6A9;&#xB418;&#xB294; <code>0</code> &#xC740; <code>IPPROTO_IP</code> &#xB97C; &#xB098;&#xD0C0;&#xB0C5;&#xB2C8;&#xB2E4;.
-&#xC5EC;&#xAE30;&#xC11C; <code>IPPROTO_IP</code> &#xB294; &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC544;&#xB2C8;&#xACE0; enum &#xC785;&#xB2C8;&#xB2E4;.
-&#xADF8;&#xB7EC;&#xB2C8;&#xAE4C; <code>0</code> &#xB300;&#xC2E0;&#xC5D0; <code>IPPROTO_IP</code> &#xB97C; &#xC785;&#xB825;&#xD55C; &#xAC83;&#xACFC; &#xB3D9;&#xC77C;&#xD55C; &#xAC83;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.
-<em>protocol</em> &#xAC12;&#xC774; <code>IPPROTO_IP</code> &#xC774;&#xBA74; socket &#xD568;&#xC218;&#xAC00; &#xC790;&#xB3D9;&#xC73C;&#xB85C; domain &#xACFC; type &#xC744; &#xBCF4;&#xACE0; &#xD310;&#xB2E8;&#xD558;&#xC5EC; 
-<code>SOCK_STREAM</code> &#xC77C; &#xACBD;&#xC6B0;&#xB294; <em>protocol</em> &#xAC12;&#xC73C;&#xB85C; <code>IPPROTO_TCP</code> &#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xACE0; 
-<code>SOCK_DGRAM</code> &#xC77C; &#xACBD;&#xC6B0;&#xB294; <code>IPPROTO_UDP</code> &#xB97C; &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.
-<code>AF_UNIX</code> ( unix domain socket ) &#xAC19;&#xC740; &#xACBD;&#xC6B0;&#xB294; local &#xC811;&#xC18D;&#xC5D0; &#xC0AC;&#xC6A9;&#xB418;&#xB294; &#xAC83;&#xC73C;&#xB85C;
-&#xB530;&#xB85C; protocol &#xC774; &#xC0AC;&#xC6A9;&#xB418;&#xC9C0; &#xC54A;&#xC73C;&#xBBC0;&#xB85C; <code>0</code> &#xC744; &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.
-&#xADF8; &#xC678;&#xC5D0;&#xB294; &#xC544;&#xB798; &#xC138; &#xBC88;&#xC9F8;&#xC640; &#xAC19;&#xC774; &#xC9C1;&#xC811; <em>protocol</em> &#xAC12;&#xC744; &#xC801;&#xC5B4;&#xC8FC;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</p>
-<pre><code class="lang-bash">$ header-enum netinet/in.h <span class="hljs-operator">-s</span> IPPROTO_IP       <span class="hljs-comment"># &#xB9E4;&#xD06C;&#xB85C;&#xAC00; &#xC544;&#xB2C8;&#xACE0; enum &#xAC12;&#xC774;&#xB2E4;.</span>
-enum {
-    IPPROTO_IP = <span class="hljs-number">0</span>,
-    IPPROTO_ICMP = <span class="hljs-number">1</span>,
-    . . .
-$ header-macro netinet/in.h <span class="hljs-operator">-s</span> IPPROTO_IP
-<span class="hljs-comment">#define IPPROTO_IP IPPROTO_IP</span>
-<span class="hljs-comment">#define IPPROTO_IPIP IPPROTO_IPIP</span>
-<span class="hljs-comment">#define IPPROTO_IPV6 IPPROTO_IPV6</span>
+<span class="hljs-comment">// &#xC774;&#xAC83;&#xC740; &#xACB0;&#xACFC;&#xC801;&#xC73C;&#xB85C; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xBB38;&#xC7A5;&#xC774; &#xB418;&#xBBC0;&#xB85C; &#xCEF4;&#xD30C;&#xC77C; &#xC624;&#xB958;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.</span>
+<span class="hljs-keyword">int</span> __atomic_store_tmp[<span class="hljs-number">3</span>] = arr;
 
-<span class="hljs-comment"># &#xC9C1;&#xC811; protocol &#xAC12;&#xC744; &#xC801;&#xC5B4;&#xC8FC;&#xC5B4;&#xC57C; &#xD55C;&#xB2E4;.</span>
-int sockfd = socket( AF_INET, SOCK_STREAM, IPPROTO_SCTP)
+<span class="hljs-comment">// &#xB300;&#xC2E0;&#xC5D0; (void)0, &#xB97C; &#xCD94;&#xAC00;&#xD574;&#xC11C; &quot;,&quot; &#xC5F0;&#xC0B0;&#xC790;&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xAC8C; &#xB418;&#xBA74;</span>
+__typeof__ ((<span class="hljs-keyword">void</span>)<span class="hljs-number">0</span>, *__atomic_store_ptr) __atomic_store_tmp = (VAL);
+
+<span class="hljs-comment">// &#xC790;&#xB3D9;&#xC73C;&#xB85C; L-value conversion &#xC774; &#xB418;&#xBBC0;&#xB85C; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xACB0;&#xACFC;&#xAC00; &#xB418;&#xC5B4; &#xC624;&#xB958;&#xAC00; &#xBC1C;&#xC0DD;&#xD558;&#xC9C0; &#xC54A;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</span>
+<span class="hljs-keyword">int</span> *__atomic_store_tmp = arr;
 </code></pre>
 
                     
