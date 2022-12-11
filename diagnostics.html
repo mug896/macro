@@ -940,6 +940,45 @@ $ header-macro -- -I . -I include &lt; foo.c
     fi
 }
 </span></code></pre>
+<p>&#xB2E4;&#xC74C;&#xC740; &#xC704;&#xC5D0;&#xC11C; &#xC791;&#xC131;&#xD55C; &#xBA85;&#xB839;&#xB4E4;&#xC744; &#xC0AC;&#xC6A9;&#xD560;&#xB54C; &#xD5E4;&#xB354;&#xC774;&#xB984; &#xC785;&#xB825;&#xC744; &#xC704;&#xD55C; &#xC790;&#xB3D9;&#xC644;&#xC131; &#xD568;&#xC218; &#xC785;&#xB2C8;&#xB2E4;.<br>glob &#xBB38;&#xC790;&#xB97C; &#xC774;&#xC6A9;&#xD55C; &#xAC80;&#xC0C9;&#xB3C4; &#xAC00;&#xB2A5;&#xD558;&#xACE0;, &#xAC80;&#xC0C9; &#xD6C4; &#xBC88;&#xD638;&#xB97C; &#xC774;&#xC6A9;&#xD55C; &#xC785;&#xB825;&#xB3C4; &#xB429;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-sh"><span class="hljs-function"><span class="hljs-title">_header_comp_bind</span></span>() { <span class="hljs-built_in">bind</span> <span class="hljs-string">&apos;&quot;\011&quot;: complete&apos;</span> ;}
+<span class="hljs-function"><span class="hljs-title">_header_comp_search</span></span>()
+{
+    <span class="hljs-built_in">local</span> res count opt
+    _header_comp_number=<span class="hljs-string">&quot;&quot;</span>
+    words=$( &lt;&lt;&lt; <span class="hljs-variable">$words</span> sort -u )
+    <span class="hljs-built_in">local</span> IFS=$<span class="hljs-string">&apos;\n&apos;</span>; <span class="hljs-built_in">echo</span>
+    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> <span class="hljs-variable">$words</span>; <span class="hljs-keyword">do</span>
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$v</span> == <span class="hljs-variable">$cur</span> ]]; <span class="hljs-keyword">then</span>
+            res+=$<span class="hljs-string">&apos;\e[36m&apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$v</span>&quot;</span>$<span class="hljs-string">&apos;\e[0m\n&apos;</span>
+            <span class="hljs-built_in">let</span> count++
+            _header_comp_number+=<span class="hljs-string">&quot;<span class="hljs-variable">$count</span> <span class="hljs-variable">$v</span>&quot;</span>$<span class="hljs-string">&apos;\n&apos;</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">done</span> 
+    (( count &gt;= LINES )) &amp;&amp; opt=<span class="hljs-string">&quot;+Gg&quot;</span>
+    less -FRSXiN <span class="hljs-variable">$opt</span> &lt;&lt;&lt; <span class="hljs-variable">${res%$&apos;\n&apos;}</span>
+    <span class="hljs-built_in">bind</span> -x <span class="hljs-string">&apos;&quot;\011&quot;: _header_comp_bind&apos;</span>
+} 
+<span class="hljs-function"><span class="hljs-title">_header_comp</span></span>()
+{
+    <span class="hljs-built_in">local</span> IFS=$<span class="hljs-string">&apos; \t\n&apos;</span> cur=<span class="hljs-variable">${COMP_WORDS[COMP_CWORD]}</span>
+    <span class="hljs-built_in">local</span> words=$( gcc -E -xc -Wp,-v /dev/null |&amp;
+        sed -En <span class="hljs-string">&apos;/#include &lt;...&gt; search/,/End of search/{ //d; p }&apos;</span> |
+        xargs -i sh -c <span class="hljs-string">&apos;cd &quot;{}&quot; &amp;&amp; find * -name &quot;*.h&quot;&apos;</span> )
+
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$cur</span> == +([<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]) ]]; <span class="hljs-keyword">then</span>
+        words=$( &lt;&lt;&lt; <span class="hljs-variable">$_header_comp_number</span> awk <span class="hljs-string">&apos;$1 == &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$cur</span>&quot;</span><span class="hljs-string">&apos; { print $2; exit }&apos;</span> )
+        COMPREPLY=( <span class="hljs-string">&quot;<span class="hljs-variable">$words</span>&quot;</span> )
+    <span class="hljs-keyword">elif</span> [[ <span class="hljs-variable">$cur</span> == *[[*?]* ]]; <span class="hljs-keyword">then</span>
+        _header_comp_search
+        <span class="hljs-built_in">return</span>
+    <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">if</span> ! <span class="hljs-built_in">declare</span> -p COMPREPLY &amp;&gt; /dev/null; <span class="hljs-keyword">then</span>
+        COMPREPLY=($(compgen -W <span class="hljs-string">&quot;<span class="hljs-variable">$words</span>&quot;</span> -- <span class="hljs-string">&quot;<span class="hljs-variable">$cur</span>&quot;</span>))
+    <span class="hljs-keyword">fi</span>
+}
+complete -F _header_comp header-{macro,<span class="hljs-keyword">function</span>,struct,typedef,enum,dump}
+</code></pre>
 <h1 id="3-">3 .</h1>
 <p>&#xBCF4;&#xD1B5; release &#xBE4C;&#xB4DC; &#xC2DC;&#xC5D0;&#xB294; &#xCEF4;&#xD30C;&#xC77C;&#xB7EC;&#xC5D0; <code>-D NDEBUG</code> &#xC635;&#xC158;&#xC744; &#xC8FC;&#xC5B4; &#xCF54;&#xB4DC; &#xB0B4;&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xC911;&#xC778;
 assert &#xB9E4;&#xD06C;&#xB85C;&#xB97C; &#xC81C;&#xAC70;&#xD569;&#xB2C8;&#xB2E4;. 
