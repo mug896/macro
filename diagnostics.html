@@ -988,7 +988,7 @@ $ header-macro -- -I . -I include &lt; foo.c
     <span class="hljs-keyword">elif</span> [[ <span class="hljs-variable">$cur</span> == *[[*?]* ]]; <span class="hljs-keyword">then</span>
         _header_comp_search
 
-    <span class="hljs-keyword">elif</span> ! <span class="hljs-built_in">declare</span> -p COMPREPLY &amp;&gt; /dev/null; <span class="hljs-keyword">then</span>
+    <span class="hljs-keyword">else</span>
         COMPREPLY=($(compgen -W <span class="hljs-string">&quot;<span class="hljs-variable">$words</span>&quot;</span> -- <span class="hljs-string">&quot;<span class="hljs-variable">$cur</span>&quot;</span>))
     <span class="hljs-keyword">fi</span>
 }
