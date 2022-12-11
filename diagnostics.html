@@ -961,10 +961,25 @@ $ header-macro -- -I . -I include &lt; foo.c
 } 
 <span class="hljs-function"><span class="hljs-title">_header_comp</span></span>()
 {
-    <span class="hljs-built_in">local</span> IFS=$<span class="hljs-string">&apos; \t\n&apos;</span> cur=<span class="hljs-variable">${COMP_WORDS[COMP_CWORD]}</span>
-    <span class="hljs-built_in">local</span> words=$( gcc -E -xc -Wp,-v /dev/null |&amp;
-        sed -En <span class="hljs-string">&apos;/#include &lt;...&gt; search/,/End of search/{ //d; p }&apos;</span> |
-        xargs -i sh -c <span class="hljs-string">&apos;cd &quot;{}&quot; &amp;&amp; find * -name &quot;*.h&quot;&apos;</span> )
+    <span class="hljs-built_in">local</span> IFS=$<span class="hljs-string">&apos; \t\n&apos;</span> cur=<span class="hljs-variable">${COMP_WORDS[COMP_CWORD]}</span> <span class="hljs-built_in">dirs</span> i
+    COMP_LINE=<span class="hljs-variable">${COMP_LINE:0:$COMP_POINT}</span>
+    [[ <span class="hljs-variable">${COMP_LINE: -1}</span> = <span class="hljs-string">&quot; &quot;</span> ]] &amp;&amp; cur=<span class="hljs-string">&quot;&quot;</span>
+
+    <span class="hljs-keyword">for</span> (( i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-variable">${#COMP_WORDS[@]}</span>; i++ )); <span class="hljs-keyword">do</span>
+        [[ <span class="hljs-variable">${COMP_WORDS[i]}</span> == <span class="hljs-string">&quot;--&quot;</span> ]] &amp;&amp; <span class="hljs-built_in">break</span>
+    <span class="hljs-keyword">done</span>
+    <span class="hljs-keyword">if</span> (( i &lt; <span class="hljs-variable">${#COMP_WORDS[@]}</span> )); <span class="hljs-keyword">then</span>
+        <span class="hljs-keyword">for</span> (( i = i + <span class="hljs-number">1</span>; i &lt; <span class="hljs-variable">${#COMP_WORDS[@]}</span>; i++ )); <span class="hljs-keyword">do</span>
+            <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">${COMP_WORDS[i]}</span> == -I ]]; <span class="hljs-keyword">then</span>
+                [[ <span class="hljs-operator">-d</span> <span class="hljs-variable">${COMP_WORDS[++i]}</span> ]] &amp;&amp; <span class="hljs-built_in">dirs</span>+=<span class="hljs-variable">${COMP_WORDS[i]}</span>$<span class="hljs-string">&apos;\n&apos;</span>
+            <span class="hljs-keyword">elif</span> [[ <span class="hljs-variable">${COMP_WORDS[i]}</span> == -I* ]]; <span class="hljs-keyword">then</span>
+                [[ <span class="hljs-operator">-d</span> <span class="hljs-variable">${COMP_WORDS[i]#-I}</span> ]] &amp;&amp; <span class="hljs-built_in">dirs</span>+=<span class="hljs-variable">${COMP_WORDS[i]#-I}</span>$<span class="hljs-string">&apos;\n&apos;</span>
+            <span class="hljs-keyword">fi</span>
+        <span class="hljs-keyword">done</span>
+    <span class="hljs-keyword">fi</span>
+    <span class="hljs-built_in">dirs</span>+=$( gcc -E -xc -Wp,-v /dev/null |&amp;
+        sed -En <span class="hljs-string">&apos;/#include &lt;...&gt; search/,/End of search/{ //d; p }&apos;</span> )
+    <span class="hljs-built_in">local</span> words=$( &lt;&lt;&lt; <span class="hljs-variable">$dirs</span> xargs -i sh -c <span class="hljs-string">&apos;cd &quot;{}&quot; &amp;&amp; find -name &quot;*.h&quot; -printf &quot;%P\n&quot;&apos;</span> )
 
     <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$cur</span> == +([<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]) ]]; <span class="hljs-keyword">then</span>
         words=$( &lt;&lt;&lt; <span class="hljs-variable">$_header_comp_number</span> awk <span class="hljs-string">&apos;$1 == &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$cur</span>&quot;</span><span class="hljs-string">&apos; { print $2; exit }&apos;</span> )
