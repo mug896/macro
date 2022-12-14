@@ -1187,7 +1187,7 @@ int &#xAC12;&#xC744; &#xC8FC;&#xBA74; int &#xB97C; &#xCC98;&#xB9AC;&#xD558;&#xB2
 <pre><code class="lang-c"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
 
 <span class="hljs-comment">// x &#xAC12;&#xC758; &#xD0C0;&#xC785;&#xC774; float &#xC77C; &#xACBD;&#xC6B0; _Generic((x), ... ) &#xBD80;&#xBD84;&#xC774; foo_float &#xC73C;&#xB85C; &#xCE58;&#xD658;&#xB418;&#xB294; &#xACB0;&#xACFC;&#xAC00; &#xB41C;&#xB2E4;.</span>
-<span class="hljs-comment">// &quot;:&quot; &#xC67C;&#xCABD;&#xC5D0;&#xB294; lvalue conversion &#xB41C; &#xD0C0;&#xC785;&#xC774; &#xC624;&#xACE0; &#xC624;&#xB978;&#xCABD;&#xC5D4; expression &#xC774; &#xC635;&#xB2C8;&#xB2E4;.</span>
+<span class="hljs-comment">// (&quot;:&quot; &#xC67C;&#xCABD;&#xC5D0;&#xB294; lvalue conversion &#xB41C; &#xD0C0;&#xC785;&#xC774; &#xC624;&#xACE0; &#xC624;&#xB978;&#xCABD;&#xC5D4; expression &#xC774; &#xC635;&#xB2C8;&#xB2E4;.)</span>
 <span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> foo(x) _Generic((x), \
         float   : foo_float, \
         double  : foo_double , \
