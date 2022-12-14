@@ -711,6 +711,10 @@ $ header-functionk linux/pci.h
 . . .
 $ header-structk net/ip.h <span class="hljs-operator">-s</span> <span class="hljs-string">&apos;sk_buff\b&apos;</span>
 . . .
+$ header-macrok <span class="hljs-string">&apos;#include &quot;mm/slab.h&quot;&apos;</span>
+. . .
+$ header-functionk <span class="hljs-string">&apos;#include &quot;fs/ext4/ext4.h&quot;&apos;</span>
+. . .
 $ header-functionk linux/syscalls.h -- -D CC_USING_FENTRY
 . . .
 $ header-functionk &lt;&lt;\@
@@ -719,10 +723,6 @@ $ header-functionk &lt;&lt;\@
 <span class="hljs-comment">#endif</span>
 <span class="hljs-comment">#include &lt;linux/syscalls.h&gt;</span>
 @
-. . .
-$ header-macrok <span class="hljs-string">&apos;#include &quot;mm/slab.h&quot;&apos;</span>
-. . .
-$ header-functionk <span class="hljs-string">&apos;#include &quot;fs/ext4/ext4.h&quot;&apos;</span>
 . . .
 </code></pre>
 <p>&#xD30C;&#xC77C; &#xB2E8;&#xC704;&#xB85C; &#xC804;&#xCC98;&#xB9AC; &#xC644;&#xB8CC;&#xB41C; &#xACB0;&#xACFC;&#xB97C; &#xBCF4;&#xB824;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</p>
