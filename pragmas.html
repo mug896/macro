@@ -561,6 +561,20 @@
 <p><a href="https://gcc.gnu.org/onlinedocs/cpp/Pragmas.html" target="_blank">https://gcc.gnu.org/onlinedocs/cpp/Pragmas.html</a></p>
 <h3 id="pragmas-accepted-by-gcc">Pragmas Accepted by GCC</h3>
 <p><a href="https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html" target="_blank">https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html</a></p>
+<h1 id="quiz">Quiz</h1>
+<p>object &#xC0AC;&#xC774;&#xC988; &#xB610;&#xB294; array &#xC758; &#xC778;&#xB371;&#xC2A4; &#xAC12;&#xC744; &#xB098;&#xD0C0;&#xB0BC;&#xB54C; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xB294; <code>size_t</code> &#xD0C0;&#xC785;,
+&#xD3EC;&#xC778;&#xD130; &#xC5F0;&#xC0B0; &#xACB0;&#xACFC;&#xC5D0; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xB294; <code>ptrdiff_t</code> &#xD0C0;&#xC785;,
+&#xD30C;&#xC77C;&#xC758; offset &#xC744; &#xB098;&#xD0C0;&#xB0BC;&#xB54C; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xB294; <code>off_t</code> &#xD0C0;&#xC785;&#xC774; &#xC788;&#xB294;&#xB370;&#xC694;.
+&#xAC01;&#xAC01; printf &#xD568;&#xC218;&#xB85C; &#xCD9C;&#xB825;&#xC744; &#xD560;&#xB54C; &#xC5B4;&#xB5A4; &#xD3EC;&#xBA67; &#xC9C0;&#xC815;&#xC790;&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xBA74; &#xB420;&#xAE4C;&#xC694;?</p>
+<pre><code class="lang-c"><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%zu\n&quot;</span>, val);        <span class="hljs-comment">// size_t &#xAC12; &#xCD9C;&#xB825;&#xC2DC;</span>
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%zd\n&quot;</span>, val);        <span class="hljs-comment">// ssize_t &#xAC12; &#xCD9C;&#xB825;&#xC2DC;</span>
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%td\n&quot;</span>, val);        <span class="hljs-comment">// ptrdiff_t &#xAC12; &#xCD9C;&#xB825;&#xC2DC;</span>
+
+<span class="hljs-comment">// off_t &#xD0C0;&#xC785;&#xC740; &#xB530;&#xB85C; &#xC9C0;&#xC815;&#xC790;&#xAC00; &#xC5C6;&#xB294;&#xB370; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%jd\n&quot;</span>, (<span class="hljs-keyword">intmax_t</span>)val);
+</code></pre>
 
                     
                     </section>
