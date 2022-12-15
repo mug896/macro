@@ -961,7 +961,7 @@ $ header-macro -- -I . -I include &lt; foo.c
 } 
 <span class="hljs-function"><span class="hljs-title">_header_comp</span></span>()
 {
-    <span class="hljs-built_in">local</span> IFS=$<span class="hljs-string">&apos; \t\n&apos;</span> cur=<span class="hljs-variable">${COMP_WORDS[COMP_CWORD]}</span> words <span class="hljs-built_in">dirs</span> i
+    <span class="hljs-built_in">local</span> IFS=$<span class="hljs-string">&apos; \t\n&apos;</span> cmd=<span class="hljs-variable">$1</span> cur=<span class="hljs-variable">${COMP_WORDS[COMP_CWORD]}</span> words <span class="hljs-built_in">dirs</span> i
     COMP_LINE=<span class="hljs-variable">${COMP_LINE:0:$COMP_POINT}</span>
     [[ <span class="hljs-variable">${COMP_LINE: -1}</span> = <span class="hljs-string">&quot; &quot;</span> ]] &amp;&amp; cur=<span class="hljs-string">&quot;&quot;</span>
 
@@ -977,9 +977,14 @@ $ header-macro -- -I . -I include &lt; foo.c
             <span class="hljs-keyword">fi</span>
         <span class="hljs-keyword">done</span>
     <span class="hljs-keyword">fi</span>
-    <span class="hljs-built_in">dirs</span>+=$( gcc -E -xc -Wp,-v /dev/null |&amp;
-        sed -En <span class="hljs-string">&apos;/#include &lt;...&gt; search/,/End of search/{ //d; p }&apos;</span> )
-    words=$( &lt;&lt;&lt; <span class="hljs-variable">$dirs</span> xargs -i sh -c <span class="hljs-string">&apos;cd &quot;{}&quot; &amp;&amp; find -name &quot;*.h&quot; -printf &quot;%P\n&quot;&apos;</span> )
+    <span class="hljs-built_in">dirs</span>+=$(
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$cmd</span> == *k ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">declare</span> <span class="hljs-operator">-f</span> _header-kernel | sed -En <span class="hljs-string">&apos;s/ (-I[ ]?[^ ]+)/\n\1/g; T; :X /^-I/{ s/^-I[ ]*//; P}; s/.*\n?//M1; /[[:alpha:]]/bX&apos;</span>
+        <span class="hljs-keyword">else</span>
+            gcc -E -xc -Wp,-v /dev/null |&amp; sed -En <span class="hljs-string">&apos;/#include &lt;...&gt; search/,/End of search/{ //d; p }&apos;</span>
+        <span class="hljs-keyword">fi</span>
+    )
+    words=$( &lt;&lt;&lt; <span class="hljs-variable">$dirs</span> xargs -i sh -c <span class="hljs-string">&apos;cd {} &amp;&amp; find -name &quot;*.h&quot; -printf &quot;%P\n&quot;&apos;</span> )
 
     <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$cur</span> == +([<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]) ]]; <span class="hljs-keyword">then</span>
         words=$( &lt;&lt;&lt; <span class="hljs-variable">$_header_comp_number</span> awk <span class="hljs-string">&apos;$1 == &apos;</span><span class="hljs-string">&quot;<span class="hljs-variable">$cur</span>&quot;</span><span class="hljs-string">&apos; { print $2; exit }&apos;</span> )
@@ -992,7 +997,7 @@ $ header-macro -- -I . -I include &lt; foo.c
         COMPREPLY=($(compgen -W <span class="hljs-string">&quot;<span class="hljs-variable">$words</span>&quot;</span> -- <span class="hljs-string">&quot;<span class="hljs-variable">$cur</span>&quot;</span>))
     <span class="hljs-keyword">fi</span>
 }
-complete -F _header_comp header-{macro,<span class="hljs-keyword">function</span>,struct,typedef,enum,dump}
+complete -F _header_comp header-{macro,<span class="hljs-keyword">function</span>,struct,typedef,enum,dump}{,k}
 </code></pre>
 <h1 id="3-">3 .</h1>
 <p>&#xBCF4;&#xD1B5; release &#xBE4C;&#xB4DC; &#xC2DC;&#xC5D0;&#xB294; &#xCEF4;&#xD30C;&#xC77C;&#xB7EC;&#xC5D0; <code>-D NDEBUG</code> &#xC635;&#xC158;&#xC744; &#xC8FC;&#xC5B4; &#xCF54;&#xB4DC; &#xB0B4;&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xC911;&#xC778;
