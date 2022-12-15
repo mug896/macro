@@ -711,11 +711,9 @@ $ header-functionk linux/pci.h
 . . .
 $ header-structk net/ip.h <span class="hljs-operator">-s</span> <span class="hljs-string">&apos;sk_buff\b&apos;</span>
 . . .
-$ header-macrok <span class="hljs-string">&apos;#include &quot;mm/slab.h&quot;&apos;</span>
+$ header-macrok <span class="hljs-string">&apos;#include &quot;mm/internal.h&quot;&apos;</span>
 . . .
 $ header-functionk <span class="hljs-string">&apos;#include &quot;fs/ext4/ext4.h&quot;&apos;</span>
-. . .
-$ header-functionk io-wq.h <span class="hljs-operator">-s</span> io_wq -- -I ./io_uring
 . . .
 $ header-functionk linux/syscalls.h -- -D CC_USING_FENTRY
 . . .
