@@ -979,7 +979,7 @@ $ header-macro -- -I . -I include &lt; foo.c
     <span class="hljs-keyword">fi</span>
     <span class="hljs-built_in">dirs</span>+=$(
         <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$cmd</span> == *k ]]; <span class="hljs-keyword">then</span>
-            <span class="hljs-built_in">declare</span> <span class="hljs-operator">-f</span> _header-kernel | sed -En <span class="hljs-string">&apos;s/ (-I[ ]*[^ ]+)/\n\1/g; T; :X /^-I/{ s/^-I[ ]*//; P}; s/.*\n?//M1; /[[:alpha:]]/bX&apos;</span>
+            <span class="hljs-built_in">declare</span> <span class="hljs-operator">-f</span> _header-kernel | sed -En <span class="hljs-string">&apos;/FUNCNAME/{ s/ (-I[ ]*[^ ]+)/\n\1/g; T; :X /^-I/{ s/^-I[ ]*//; P}; s/.*\n?//M1; /[[:alpha:]]/bX }&apos;</span>
         <span class="hljs-keyword">else</span>
             gcc -E -xc -Wp,-v /dev/null |&amp; sed -En <span class="hljs-string">&apos;/#include &lt;...&gt; search/,/End of search/{ //d; p }&apos;</span>
         <span class="hljs-keyword">fi</span>
