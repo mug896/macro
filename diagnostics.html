@@ -1077,8 +1077,8 @@ atomic_store_explicit(ptr, &amp;arr, XXX);
 <span class="hljs-comment">// &#xC5EC;&#xAE30;&#xC11C; __atomic_store_ptr &#xC758; &#xD0C0;&#xC785;&#xC740; (ptr) &#xAC12;&#xC5D0; &#xB530;&#xB77C;  int(*)[3] &#xC774; &#xB429;&#xB2C8;&#xB2E4;.</span>
 __auto_type __atomic_store_ptr = (ptr);
 
-<span class="hljs-comment">// &#xB9CC;&#xC57D;&#xC5D0; (void)0, &#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;&#xBA74; *__atomic_store_ptr &#xC740; dereferencing &#xC5D0; &#xC758;&#xD574; </span>
-<span class="hljs-comment">// __typeof__ (*__atomic_store_ptr) &#xC758; &#xD0C0;&#xC785;&#xC740; int[3] &#xC774; &#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</span>
+<span class="hljs-comment">// &#xB9CC;&#xC57D;&#xC5D0; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774;  (void)0, &#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;&#xBA74; *__atomic_store_ptr &#xC740;</span>
+<span class="hljs-comment">// dereferencing &#xC5D0; &#xC758;&#xD574; __typeof__ (*__atomic_store_ptr) &#xC758; &#xD0C0;&#xC785;&#xC740; int[3] &#xC774; &#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</span>
 __typeof__ (*__atomic_store_ptr) __atomic_store_tmp = (VAL);
 
 <span class="hljs-comment">// &#xC774;&#xAC83;&#xC740; &#xACB0;&#xACFC;&#xC801;&#xC73C;&#xB85C; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xBB38;&#xC7A5;&#xC774; &#xB418;&#xBBC0;&#xB85C; &#xCEF4;&#xD30C;&#xC77C; &#xC624;&#xB958;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.</span>
