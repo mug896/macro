@@ -1066,7 +1066,7 @@ L-value conversion &#xB300;&#xC0C1;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.
 &#xBCC0;&#xACBD;&#xC774; &#xB418;&#xACE0;, <code>int(void)</code> &#xC640; &#xAC19;&#xC740; &#xD568;&#xC218;&#xB77C;&#xBA74; <code>int(*)(void)</code> &#xB85C; &#xBCC0;&#xACBD;&#xC774; &#xB429;&#xB2C8;&#xB2E4;.
 &#xB610;&#xD55C; <code>volatile</code>, <code>const</code> or <code>_Atomic</code> &#xAC19;&#xC740; &#xD55C;&#xC815;&#xC790;&#xB3C4; &#xC81C;&#xAC70;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.</p>
 <blockquote>
-<p><code>foo( int arr[3], int fun(void) ) { ... }</code> &#xC640; &#xAC19;&#xC740; &#xD568;&#xC218;&#xAC00; &#xC788;&#xB2E4;&#xBA74; &#xD568;&#xC218;&#xC758; &#xBCF8;&#xBB38; &#xB0B4;&#xC5D0;&#xC11C; 
+<p><code>void foo( int arr[3], int fun(void) ) { ... }</code> &#xC640; &#xAC19;&#xC740; &#xD568;&#xC218;&#xAC00; &#xC788;&#xB2E4;&#xBA74; &#xD568;&#xC218;&#xC758; &#xBCF8;&#xBB38; &#xB0B4;&#xC5D0;&#xC11C; 
 arr &#xB294; &#xD0C0;&#xC785;&#xC774; <code>int*</code> &#xAC00; &#xB418;&#xACE0; fun &#xB294; <code>int(*)(void)</code> &#xAC00; &#xB418;&#xB294;&#xAC83;&#xC744; &#xC0DD;&#xAC01;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.</p>
 </blockquote>
 <pre><code class="lang-c"><span class="hljs-keyword">int</span> arr[<span class="hljs-number">3</span>];
