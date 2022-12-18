@@ -701,7 +701,7 @@ _header-<span class="hljs-function"><span class="hljs-title">kernel</span></span
         -I./include/uapi -I./include/generated/uapi
 }
 header-<span class="hljs-function"><span class="hljs-title">functionk</span></span> () { _header-kernel <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> ;}
-header-<span class="hljs-function"><span class="hljs-title">macrok</span></span> () { _header-kernel <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> | sed -E <span class="hljs-string">&apos;/^#define CONFIG_/d&apos;</span> ;}
+header-<span class="hljs-function"><span class="hljs-title">macrok</span></span> () { _header-kernel <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> | sed -E <span class="hljs-string">&apos;/^#define CONFIG_|^#include &lt;generated\/autoconf\.h&gt;/d&apos;</span> ;}
 header-<span class="hljs-function"><span class="hljs-title">typedefk</span></span> () { _header-kernel <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> ;}
 header-<span class="hljs-function"><span class="hljs-title">structk</span></span> () { _header-kernel <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> ;}
 header-<span class="hljs-function"><span class="hljs-title">enumk</span></span> () { _header-kernel <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> ;}
