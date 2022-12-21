@@ -717,11 +717,11 @@ $ header-functionk <span class="hljs-string">&apos;#include &quot;fs/ext4/ext4.h
 . . .
 $ header-functionk linux/syscalls.h -- -D CC_USING_FENTRY
 . . .
-$ header-functionk &lt;&lt;\@
+$ header-functionk &lt;&lt;\@ <span class="hljs-operator">-s</span> IS_ERR
 <span class="hljs-comment">#if defined(CONFIG_FUNCTION_TRACER)</span>
 <span class="hljs-comment">#define CC_USING_FENTRY</span>
 <span class="hljs-comment">#endif</span>
-<span class="hljs-comment">#include &lt;linux/syscalls.h&gt;</span>
+<span class="hljs-comment">#include &quot;init/main.c&quot;</span>
 @
 . . .
 </code></pre>
