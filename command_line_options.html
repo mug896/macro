@@ -694,7 +694,8 @@ _header-<span class="hljs-function"><span class="hljs-title">kernel</span></span
         <span class="hljs-built_in">local</span> v dash=<span class="hljs-string">&quot;--&quot;</span>
         <span class="hljs-keyword">for</span> v <span class="hljs-keyword">do</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$v</span>&quot;</span> = <span class="hljs-string">&quot;--&quot;</span> ] &amp;&amp; { dash=<span class="hljs-string">&quot;&quot;</span>; <span class="hljs-built_in">break</span> ;}; <span class="hljs-keyword">done</span>
         <span class="hljs-variable">${FUNCNAME[1]%?}</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> <span class="hljs-variable">$dash</span> \
-        -D __KERNEL__ -include ./include/linux/kconfig.h \
+        -D __KERNEL__ -D CC_USING_FENTRY \
+        -include ./include/linux/kconfig.h \
         -I./arch/x86/include -I./arch/x86/include/generated -I./include \
         -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi \
         -I./include/uapi -I./include/generated/uapi
