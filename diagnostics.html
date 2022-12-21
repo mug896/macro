@@ -913,7 +913,7 @@ $ header-macro -- -I . -I include &lt; foo.c
                 <span class="hljs-built_in">shift</span> ;;
             --) 
                 <span class="hljs-built_in">shift</span>
-                <span class="hljs-keyword">while</span> [[ <span class="hljs-variable">$1</span> =~ ([&lt;\<span class="hljs-string">&quot;])?([[:alnum:]_/.-]+\.h)([\&quot;&gt;])? ]]; do
+                <span class="hljs-keyword">while</span> [[ <span class="hljs-variable">$1</span> =~ ([&lt;\<span class="hljs-string">&quot;])?([[:alnum:]_/.-]+\.[hc])([\&quot;&gt;])? ]]; do
                     if [ -n &quot;</span><span class="hljs-variable">${BASH_REMATCH[1]}</span><span class="hljs-string">&quot; ]; then
                         hsum+=$&apos;\n\a\n#include &apos;<span class="hljs-variable">${BASH_REMATCH[1]}</span><span class="hljs-variable">${BASH_REMATCH[2]}</span><span class="hljs-variable">${BASH_REMATCH[3]}</span>$&apos;\n\a\n&apos;
                     else
