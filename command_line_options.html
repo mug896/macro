@@ -780,6 +780,10 @@ $ header-make <span class="hljs-operator">-d</span> block/ioctl.c
     target_i=<span class="hljs-variable">${target_c%.*}</span>.i
 
     make <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> &gt;&amp;<span class="hljs-number">2</span>
+    <span class="hljs-keyword">if</span> [[ ! <span class="hljs-operator">-e</span> <span class="hljs-variable">$target_i</span> ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&gt;&gt;&gt; Failed: make <span class="hljs-variable">$target_i</span>&quot;</span> &gt;&amp;<span class="hljs-number">2</span>
+        <span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
+    <span class="hljs-keyword">fi</span>
     sed <span class="hljs-string">&apos;/\a/,/\a/d&apos;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$target_i</span>&quot;</span> |
     sed -zE <span class="hljs-string">&apos;s/^.*\n# [0-9]+ &quot;&lt;command-line&gt;&quot; [0-9]+\n//&apos;</span> |
     sed -E <span class="hljs-string">&apos;/^(#define |#pragma |# [0-9]+ )/d&apos;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$tmpdir</span>/expanded&quot;</span>
