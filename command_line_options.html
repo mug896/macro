@@ -676,7 +676,7 @@ gcc &#xC5D0; &#xAE30;&#xBCF8;&#xC801;&#xC73C;&#xB85C; &#xC124;&#xC815;&#xB418;&#
 <h1 id="quiz">Quiz</h1>
 <p>&#xB9AC;&#xB205;&#xC2A4; &#xCEE4;&#xB110; &#xC18C;&#xC2A4;&#xC5D0;&#xC11C; <code>linux/pci.h</code> &#xD5E4;&#xB354;&#xB97C; include &#xD588;&#xC744;&#xB54C; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xB294; &#xD568;&#xC218;&#xB97C; &#xBCF4;&#xB824;&#xBA74; &#xC5B4;&#xB5BB;&#xAC8C; &#xD560;&#xAE4C;&#xC694;?</p>
 <pre><code class="lang-bash">$ <span class="hljs-built_in">cd</span> linux-source-x.xx.x
-
+$ cp /boot/config-`uname -r` ./.config
 $ make init/main.i     <span class="hljs-comment"># &#xCC98;&#xC74C; &#xD55C;&#xBC88;&#xB9CC; &#xC2E4;&#xD589;</span>
 
 $ header-function &lt;&lt;\@ -- -D__KERNEL__ \
